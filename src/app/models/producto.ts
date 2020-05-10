@@ -9,8 +9,8 @@ export class producto{
         public precio:number,
         public descuento:number,
         public precio_total:number,
-        public created_at:Date,
-        public updated_at:Date
+        public created_at:any,
+        public updated_at:any
         // Falta atributo pivot
     )
     {}

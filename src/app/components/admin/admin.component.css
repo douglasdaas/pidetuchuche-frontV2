@@ -1,0 +1,8 @@
+.modal {
+  overflow-y: auto !important;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
