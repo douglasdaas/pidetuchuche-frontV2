@@ -1,4 +1,6 @@
-export class producto{
+// importar categoria
+import {Categoria} from './categoria.js';
+export class Producto{
     constructor(
         public id:number,
         public nombre:string,
@@ -10,7 +12,8 @@ export class producto{
         public descuento:number,
         public precio_total:number,
         public created_at:any,
-        public updated_at:any
+        public updated_at:any,
+        public categorias: Array<Categoria>
         // Falta atributo pivot
     )
     {}

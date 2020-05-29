@@ -26,9 +26,7 @@
         </div>
       </div>
     </div>
-  <section class="full-wh full-h-to-auto first-section">
-
-  </section>
+  
 
   <section class="full-wh full-h-to-auto ">
     <div class="welcome-header container-fluid">
@@ -38,50 +36,31 @@
     <div class="search-form">
       <h1>Nuestro Catálogo</h1>
       <form class="form-inline my-2 my-lg-0">
-        <input onkeypress="return event.keyCode != 13" onkeyup="filter();" id="search1" class="form-control" type="text" placeholder="Busca tu chuche" >
-      </form>
+        <input
+        (keyup)="filterProduct($event)"
+        class="form-control"
+        type="text"
+        placeholder="Busca tu chuche"
+      />      </form>
     </div>
     <div class="category-filter">
-      <div>
-        <a href="#container-products"><button id="alimentos" type='button'>Alimentos</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="bebidas" type='button'>Bebidas</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="chocolates" type='button'>Chocolates</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="cereal" type='button'>Cereales </button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="gomitas" type='button'>Gomitas</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="papitas" type='button'>Papitas</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="galletas" type='button'>Galletas</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="combos" type='button'>Combos</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button id="chicles" type='button'>Chicles</button></a>
-      </div>
-      <div>
-        <a href="#container-products"><button onclick="showAll()" type='button'>Todo</button></a>
-      </div>
+      <div *ngFor="let categoria of categorias">
+        <button (click)="filterTag(categoria.nombre)" type ="button">{{categoria.nombre}}</button>
+      </div>  
+      <button (click)="filterTag('todo')" type="button">TODO</button>
     </div>
     <div class="second-section">
-      <div id="container-products" class="container-fluid container-products">
-
+      <div *ngIf="filterProducts == undefined">
+        <app-producto [productos]="productos"></app-producto>
+      </div>
+      <div *ngIf="filterProducts != undefined">
+        <app-producto [productos]="filterProducts"></app-producto>
       </div>
     </div>
   </section>
 
-
-<app-footer></app-footer>
+  
+  <app-footer></app-footer>
 
   
 

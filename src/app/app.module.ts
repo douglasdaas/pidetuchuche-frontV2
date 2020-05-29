@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule }   from '@angular/forms';
 
 // Componentes
 import { AdminComponent} from './components/admin/admin.component';
 import { FooterComponent} from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { ProductoComponent } from './components/producto/producto.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +18,17 @@ import { LoginComponent } from './components/login/login.component';
     AdminComponent,
     HomeComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent, 
+    ProductoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
