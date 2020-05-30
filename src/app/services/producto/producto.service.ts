@@ -11,7 +11,7 @@ export class ProductoService {
   constructor(
     public _http: HttpClient
   ) { 
-    this.url = GLOBAL.url;
+    this.url = GLOBAL.urlLocal;
   }
   pruebas(){
     return "Hola Mundo";
@@ -27,15 +27,23 @@ export class ProductoService {
     return this._http.get(this.url + '/productos'+ id );
   }
 
-  createProduct(token, producto:Producto){
-    let json = JSON.stringify(producto);
+  createProduct(token, producto){
+    let headers = new HttpHeaders().set('Authorization', token);
 
-    let params =json;
-    let headers = new HttpHeaders().set('Content-Type', 'Application/json')
-                                   .set('Authorization', token);
-
-    return this._http.post(this.url+'/productos' , params, { headers: headers});
+    return this._http.post(this.url+'/productos' , producto, { headers: headers});
  
+  }
+
+  editProduct(token, producto){
+    let headers = new HttpHeaders().set('Authorization', token);
+
+    return this._http.patch(this.url + '/productos/' + producto.id,producto, {headers: headers});
+  }
+
+  deleteProduct(token, producto){
+    let headers = new HttpHeaders().set('Authorization', token);
+
+    return this._http.delete(this.url + '/productos/' + producto.id, {headers: headers});
   }
 
 }

@@ -18,8 +18,15 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" #password="ngModel" placeholder="Password"
-          [(ngModel)]="user.password" required class="form-control">
+          <input 
+            type="password" 
+            name="password" 
+            #password="ngModel" 
+            placeholder="Password"
+            [(ngModel)]="user.password" 
+            class="form-control"
+            required 
+            >
           <span *ngIf="!password.valid && password.touched">
             La clave no es valida 
           </span>

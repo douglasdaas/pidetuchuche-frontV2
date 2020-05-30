@@ -14,19 +14,19 @@
         <div class="modal-content">
           <div class="modal-body">
             <div id="create-product" class="container">
-              <form #newProduct="ngForm" (ngSubmit)="onSubmit(newProduct)">
+              <form #newProduct="ngForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                  <label for="product_name">Nombre del producto</label>
+                  <label for="nombre">Nombre del producto</label>
                   <input
                     type="text"
                     class="form-control"
                     name="nombre"
                     #nombre="ngModel"
                     [(ngModel)]="producto.nombre"
-                    id="product_name"
+                    id="nombre"
                     placeholder="Nutella, Pringles, RedBull..."
 
-                  />
+                  >
                 </div>
                 <div class="custom-file">
                   <div class="form-group">
@@ -36,26 +36,26 @@
                       name="imagen"
                       #imagen="ngModel"
                       [(ngModel)]="producto.imagen" 
-                      id="product_img" 
-                    />
+                      id="imagen" 
+                    >
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="product_description">Descripcion</label>
+                  <label for="description">Descripcion</label>
                   <input
                     type="text"
                     name="description"
                     #description="ngModel"
                     [(ngModel)]="producto.description"
                     class="form-control"
-                    id="product_description"
+                    id="description"
                     placeholder="Descripción del Producto"
-                  />
+                  >
                 </div>
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_quantity">Cantidad</label>
+                      <label for="cantidad">Cantidad</label>
                       <input
                         type="number"
                         min="0"
@@ -64,14 +64,14 @@
                         #cantidad="ngModel"
                         [(ngModel)]="producto.cantidad"
                         class="form-control"
-                        id="product_quantity"
+                        id="cantidad"
                         placeholder="Nº de Productos"
-                      />
+                      >
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_priority">Prioridad</label>
+                      <label for="prioridad">Prioridad</label>
                       <input
                         type="number"
                         min="0"
@@ -80,9 +80,9 @@
                         #prioridad="ngModel"
                         [(ngModel)]="producto.prioridad"
                         class="form-control"
-                        id="product_priority"
+                        id="prioridad"
                         placeholder="Nº entre 1 y 10"
-                      />
+                      >
                       <small
                         >La prioridad indica en que orden se muestra el
                         producto, siendo 1 la maxima (se enseña primero.)</small
@@ -93,7 +93,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_price">Precio</label>
+                      <label for="precio">Precio</label>
                       <input
                         type="number"
                         min="0"
@@ -102,14 +102,14 @@
                         #precio="ngModel"
                         [(ngModel)]="producto.precio"
                         class="form-control"
-                        id="product_price"
+                        id="precio"
                         placeholder="$"
-                      />
+                      >
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_discount">Descuento</label>
+                      <label for="descuento">Descuento</label>
                       <input
                         type="number"
                         min="0"
@@ -118,9 +118,9 @@
                         #descuento="ngModel"
                         [(ngModel)]="producto.descuento"
                         class="form-control"
-                        id="product_discount"
+                        id="descuento"
                         placeholder="%"
-                      />
+                      >
                       <small
                         >El descuento es un numero entero, el cual representa un
                         porcentaje de descuento.</small
@@ -129,7 +129,7 @@
                     </div>
                   </div>
                 </div>
-                <label for="product_discount">Categorias</label>
+                <label for="categoria">Categorias</label>
                 <div class="form-group">
                   <div class="form-check-inline">
                     <input
@@ -137,7 +137,7 @@
                       class="form-check-input"
                       value="chocolates"
                       id="categoria0"
-                    />
+                    >
                     <label class="form-check-label" for="exampleCheck1"
                       >Chocolates</label
                     >
@@ -148,7 +148,7 @@
                       class="form-check-input"
                       value="dulces"
                       id="categoria1"
-                    />
+                    >
                     <label class="form-check-label" for="exampleCheck1"
                       >Dulces</label
                     >
@@ -159,7 +159,7 @@
                       class="form-check-input"
                       value="salados"
                       id="categoria2"
-                    />
+                    >
                     <label class="form-check-label" for="exampleCheck1"
                       >Salados</label
                     >
@@ -170,7 +170,7 @@
                       class="form-check-input"
                       value="bebidas"
                       id="categoria3"
-                    />
+                    >
                     <label class="form-check-label" for="exampleCheck1"
                       >Bebidas</label
                     >
@@ -181,33 +181,23 @@
                       class="form-check-input"
                       value="combos"
                       id="categoria4"
-                    />
+                    >
                     <label class="form-check-label" for="exampleCheck1"
                       >Combos</label
                     >
                   </div>
-                  <div class="form-check-inline">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      value="bebidas"
-                      id="categoria7"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Bebidas</label
-                    >
-                  </div>
                 </div>
-                <div>
-
-                  <input
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
                     type="submit"
                     data-dismiss="modal"
                     class="btn btn-primary"
-                    value="Crear producto"
-                  />
-                </div>
-              </form>
+                    (click)= "onSubmit()"
+                  > 
+                    Crear Producto
+                </button>
             </div>
           </div>
         </div>
@@ -260,7 +250,7 @@
           </div>
           <div class="modal-footer">
             <button
-              onclick="createProduct()"
+              (click)="createProduct()"
               type="button"
               data-dismiss="modal"
               class="btn btn-primary"
@@ -318,21 +308,19 @@
                         min="0"
                         step="1"
                         class="form-control"
-                        id="product_quantity"
                         placeholder="Nº de Productos"
                       />
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_priority">Prioridad</label>
+                      <label for="prioridad">Prioridad</label>
                       <input
                         id="inputV4"
                         type="number"
                         min="0"
                         step="1"
                         class="form-control"
-                        id="product_priority"
                         placeholder="Nº entre 1 y 10"
                       />
                       <small
@@ -345,28 +333,26 @@
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_price">Precio</label>
+                      <label for="precio">Precio</label>
                       <input
                         id="inputV5"
                         type="number"
                         min="0"
                         step="1"
                         class="form-control"
-                        id="product_price"
                         placeholder="$"
                       />
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="product_discount">Descuento</label>
+                      <label for="descuento">Descuento</label>
                       <input
                         id="inputV6"
                         type="number"
                         min="0"
                         step="1"
                         class="form-control"
-                        id="product_discount"
                         placeholder="%"
                       />
                       <small
@@ -377,7 +363,7 @@
                     </div>
                   </div>
                 </div>
-                <label for="product_discount">Categorias</label>
+                <label for="categoria">Categorias</label>
                 <div class="form-group">
                   <div class="form-check-inline">
                     <input
@@ -394,33 +380,33 @@
                     <input
                       type="checkbox"
                       class="form-check-input"
-                      value="gomitas"
+                      value="dulces"
                       id="categoriaV1"
                     />
                     <label class="form-check-label" for="exampleCheck1"
-                      >Gomitas</label
+                      >Dulces</label
                     >
                   </div>
                   <div class="form-check-inline">
                     <input
                       type="checkbox"
                       class="form-check-input"
-                      value="cereal"
+                      value="salados"
                       id="categoriaV2"
                     />
                     <label class="form-check-label" for="exampleCheck1"
-                      >Cereal</label
+                      >Salados</label
                     >
                   </div>
                   <div class="form-check-inline">
                     <input
                       type="checkbox"
                       class="form-check-input"
-                      value="galletas"
+                      value="bebidas"
                       id="categoriaV3"
                     />
                     <label class="form-check-label" for="exampleCheck1"
-                      >Galletas</label
+                      >Bebidas</label
                     >
                   </div>
                   <div class="form-check-inline">
@@ -434,57 +420,13 @@
                       >Combos</label
                     >
                   </div>
-                  <div class="form-check-inline">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      value="papitas"
-                      id="categoriaV5"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Papitas</label
-                    >
-                  </div>
-                  <div class="form-check-inline">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      value="chicles"
-                      id="categoriaV6"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Chicles</label
-                    >
-                  </div>
-                  <div class="form-check-inline">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      value="bebidas"
-                      id="categoriaV7"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Bebidas</label
-                    >
-                  </div>
-                  <div class="form-check-inline">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      value="alimentos"
-                      id="categoriaV8"
-                    />
-                    <label class="form-check-label" for="exampleCheck1"
-                      >Alimentos</label
-                    >
-                  </div>
                 </div>
               </form>
             </div>
           </div>
           <div class="modal-footer">
             <button
-              onclick="editProduct()"
+              (click)="editProduct()"
               type="button"
               data-dismiss="modal"
               class="btn btn-primary"
@@ -637,10 +579,16 @@
     </div>
     <div class="second-section">
       <div *ngIf="filterProducts == undefined">
-        <app-producto [productos]="productos"></app-producto>
+        <app-producto 
+          [productos]="productos"
+          (shouldEdit)= "shouldEdit($event)"
+        ></app-producto>
       </div>
       <div *ngIf="filterProducts != undefined">
-        <app-producto [productos]="filterProducts"></app-producto>
+        <app-producto 
+          [productos]="filterProducts"
+          (shouldEdit)= "shouldEdit($event)"
+        ></app-producto>
       </div>
     </div>
   </section>
