@@ -19,11 +19,15 @@ export class ProductoComponent implements OnInit {
   @Input() categorias: Array<Categoria>;
   @Output() public shouldEdit = new EventEmitter<any>();
   public token;
-  
+
   constructor(
+    // tslint:disable-next-line:variable-name
     private _route: ActivatedRoute,
+    // tslint:disable-next-line:variable-name
     private _router: Router,
+    // tslint:disable-next-line:variable-name
     private _productoService: ProductoService,
+    // tslint:disable-next-line:variable-name
     private _userService: UserService
   ) { }
 
@@ -32,19 +36,19 @@ export class ProductoComponent implements OnInit {
     AOS.refresh();
     this.token = this._userService.getToken();
     console.log( this._productoService.pruebas());
-    
+
   }
 
 
 
-  fillUpdate(producto){
-    console.log(producto)
-    let nombre = document.getElementById('inputV1') as HTMLInputElement;
-    let descripcion = document.getElementById('inputV2') as HTMLInputElement;
-    let cantidad = document.getElementById('inputV3') as HTMLInputElement;
-    let prioridad = document.getElementById('inputV4') as HTMLInputElement;
-    let precio = document.getElementById('inputV5') as HTMLInputElement;
-    let descuento = document.getElementById('inputV6') as HTMLInputElement;
+  fillUpdate(producto) {
+    console.log(producto);
+    const nombre = document.getElementById('inputV1') as HTMLInputElement;
+    const descripcion = document.getElementById('inputV2') as HTMLInputElement;
+    const cantidad = document.getElementById('inputV3') as HTMLInputElement;
+    const prioridad = document.getElementById('inputV4') as HTMLInputElement;
+    const precio = document.getElementById('inputV5') as HTMLInputElement;
+    const descuento = document.getElementById('inputV6') as HTMLInputElement;
 
     nombre.value = producto.nombre;
     descripcion.value = producto.descripcion;
@@ -53,19 +57,20 @@ export class ProductoComponent implements OnInit {
     precio.value = String(producto.precio);
     descuento.value = String(producto.descuento);
 
-    for (var k=0; k <= 4; k++) {
-      let categorias = document.getElementById(`categoriaV${[k]}`) as HTMLInputElement;
+    for (let k = 0; k <= 4; k++) {
+      const categorias = document.getElementById(`categoriaV${[k]}`) as HTMLInputElement;
       categorias.checked = false;
-      console.log(`Limpiando Todas las Categorias, ${[k]} limpiezas`)
+      console.log(`Limpiando Todas las Categorias, ${[k]} limpiezas`);
     }
 
     if (producto.categorias.length > 0) {
-      for (var i=0; i < producto.categorias.length; i++) {  //<---- Ciclo Recorre Categorias
-        for (var j=0; j <= 4; j++) {  //<---- Ciclo Recorre Checkboxes
-          let categoria = document.getElementById(`categoriaV${[j]}`) as HTMLInputElement;
-            if (producto.categorias[i].nombre == categoria.value ){
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < producto.categorias.length; i++) {  // <---- Ciclo Recorre Categorias
+        for (let j = 0; j <= 4; j++) {  // <---- Ciclo Recorre Checkboxes
+          const categoria = document.getElementById(`categoriaV${[j]}`) as HTMLInputElement;
+          if (producto.categorias[i].nombre === categoria.value ) {
               categoria.checked = true;
-              console.log('Agregando categoria :: ', categoria.value)
+              console.log('Agregando categoria :: ', categoria.value);
             }
         }
       }
@@ -76,65 +81,66 @@ export class ProductoComponent implements OnInit {
     );
   }
 
-  editProduct(producto){
-    let nombre = document.getElementById('inputV1') as HTMLInputElement;
-    let descripcion = document.getElementById('inputV2') as HTMLInputElement;
-    let cantidad = document.getElementById('inputV3') as HTMLInputElement;
-    let prioridad = document.getElementById('inputV4') as HTMLInputElement;
-    let precio = document.getElementById('inputV5') as HTMLInputElement;
-    let descuento = document.getElementById('inputV6') as HTMLInputElement;
+  editProduct(producto) {
+    const nombre = document.getElementById('inputV1') as HTMLInputElement;
+    const descripcion = document.getElementById('inputV2') as HTMLInputElement;
+    const cantidad = document.getElementById('inputV3') as HTMLInputElement;
+    const prioridad = document.getElementById('inputV4') as HTMLInputElement;
+    const precio = document.getElementById('inputV5') as HTMLInputElement;
+    const descuento = document.getElementById('inputV6') as HTMLInputElement;
 
-    let product_category = [];
+    // tslint:disable-next-line:variable-name
+    const product_category = [];
     // Se agregan las categorias al request
-    for (var i = 0; i <= 4; i++) {
-      let categoria = document.getElementById(`categoriaV${i}`) as HTMLInputElement;
+    for (let i = 0; i <= 4; i++) {
+      const categoria = document.getElementById(`categoriaV${i}`) as HTMLInputElement;
       if (categoria.checked === true) {
         product_category.push(categoria.value);
       }
     }
 
-    //Se agrega la imagen si existe en el request
+    // Se agrega la imagen si existe en el request
     const productData = new FormData();
-    if ( $('#inputVIMG').prop("files")[0] !== undefined ){
-      productData.append("imagen", $('#inputVIMG').prop("files")[0]);
-    };
+    if ( $('#inputVIMG').prop('files')[0] !== undefined ) {
+      productData.append('imagen', $('#inputVIMG').prop('files')[0]);
+    }
 
-    productData.append("id", String(producto.id));
-    productData.append("nombre", String(nombre));
-    productData.append("descripcion", String(descripcion));
-    productData.append("cantidad", String(cantidad));
-    productData.append("prioridad", String(prioridad));
-    productData.append("precio", String(precio));
-    productData.append("descuento", String(descuento));
+    productData.append('id', String(producto.id));
+    productData.append('nombre', String(nombre));
+    productData.append('descripcion', String(descripcion));
+    productData.append('cantidad', String(cantidad));
+    productData.append('prioridad', String(prioridad));
+    productData.append('precio', String(precio));
+    productData.append('descuento', String(descuento));
 
-    this._productoService.createProduct(this.token,productData).subscribe(
-      response =>{
+    this._productoService.editProduct(this.token, producto.id , productData).subscribe(
+      response => {
         console.log(response);
         alert('Producto modificado');
         AOS.refresh();
       },
-      error =>{
-        alert('Error')
-        console.log(<any>error);
+      error => {
+        alert('Error');
+        console.log(error as any);
       }
     );
   }
-  
-  deleteProduct(producto){
-    let opcion = confirm("Clicka en Aceptar o Cancelar");
+
+  deleteProduct(producto) {
+    const opcion = confirm('Clicka en Aceptar o Cancelar');
     console.log(producto.id);
-    if(opcion == true){
-      this._productoService.deleteProduct(this.token,producto.id).subscribe(
-        response =>{
+    if (opcion === true) {
+      this._productoService.deleteProduct(this.token, producto).subscribe(
+        response => {
           console.log(response);
           alert('Producto eliminado');
           AOS.refresh();
         },
         error => {
-          console.log(<any>error);
+          console.log(error as any);
           alert('Error vuelva a iniciar sesion ');
         }
-      )
+      );
     }
   }
 }
