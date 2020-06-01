@@ -135,21 +135,8 @@ h1 {
   padding: 90px;
 }
 
-.first-section {
-  background-image: url("../../../img/fondo.jpg");
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  position: fixed;
-  background-size: cover;
-  z-index: -99;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-.first-section img {
-  width: 100vw;
-}
+
+
 
 .full-wh {
   height: auto;
@@ -398,18 +385,7 @@ a {
 
 
 @media (max-width: 992px) {
-  .first-section {
-    background-image: url("../../../img/fondoR.jpg");
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    position: fixed;
-    z-index: -99;
-    background-size: cover;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
+  
 
   .logo-prox {
     width: 300px;

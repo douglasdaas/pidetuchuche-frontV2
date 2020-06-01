@@ -1,3 +1,42 @@
-<p>
-  login works!
-</p>
+<div class="container-fluid ">
+  <div class="full-wh full-h-to-auto">
+    <div class="col-md-6">
+      <div class="alert alert-success" *ngIf="status == 'success'">
+        Has iniciado sesion correctamente
+      </div>
+      <div class="alert alert-danger" *ngIf="status == 'error'">
+        Usuario o Clave no valida
+      </div>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col-md-5">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+          placeholder="Email" class="form-control" required />
+          <span *ngIf="!email.valid && email.touched">
+            El email no es valido
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            name="password" 
+            #password="ngModel" 
+            placeholder="Password"
+            [(ngModel)]="user.password" 
+            class="form-control"
+            required 
+            >
+          <span *ngIf="!password.valid && password.touched">
+            La clave no es valida 
+          </span>
+        </div>
+        <div>
+          <input type="submit" value="Iniciar sesion" class="btn btn-primary"
+          [disabled]="!loginForm.form.valid" >
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>

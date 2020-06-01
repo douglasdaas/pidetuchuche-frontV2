@@ -1,317 +1,597 @@
-<div class="pos-f-t">
-  <!-- Modal create product -->
-  <!-- Modal -->
-  <div class="modal fade" id="createProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div id="create-product" class="container">
-            <form id="createForm">
-              <div class="form-group">
-                <label for="product_name">Nombre del producto</label>
-                <input type="text" class="form-control" id="product_name" placeholder="Nutella, Pringles, RedBull...">
-              </div>
-              <div class="custom-file">
+<div class="opacity">
+  <div class="pos-f-t">
+    <!-- Modal create product -->
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="createProduct"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div id="create-product" class="container">
+              <form #newProduct="ngForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                  <input type="file" class="" id="product_img">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="product_description">Descripcion</label>
-                <input type="text" class="form-control" id="product_description" placeholder="Descripción del Producto">
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_quantity">Cantidad</label>
-                    <input type="number" min="0" step="1" class="form-control" id="product_quantity" placeholder="Nº de Productos">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_priority">Prioridad</label>
-                    <input type="number" min="0" step="1" class="form-control" id="product_priority" placeholder="Nº entre 1 y 10">
-                    <small>La prioridad indica en que orden se muestra el producto, siendo 1 la maxima (se enseña primero.)</small>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_price">Precio</label>
-                    <input type="number" min="0" step="1" class="form-control" id="product_price" placeholder="$">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_discount">Descuento</label>
-                    <input type="number" min="0" step="1" class="form-control" id="product_discount" placeholder="%">
-                    <small>El descuento es un numero entero, el cual representa un porcentaje de descuento.</small>
-                    <small>Si se deja vacio es cero</small>
-                  </div>
-                </div>
-              </div>
-              <label for="product_discount">Categorias</label>
-              <div class="form-group">
+                  <label for="nombre">Nombre del producto</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="nombre"
+                    #nombre="ngModel"
+                    [(ngModel)]="producto.nombre"
+                    id="nombre"
+                    placeholder="Nutella, Pringles, RedBull..."
 
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="chocolates" id="categoria0">
-                  <label class="form-check-label" for="exampleCheck1">Chocolates</label>
+                  >
                 </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="gomitas" id="categoria1">
-                  <label class="form-check-label" for="exampleCheck1">Gomitas</label>
+                <div class="custom-file">
+                  <div class="form-group">
+                    <input 
+                      type="file" 
+                      class=""
+                      name="imagen"
+                      #imagen="ngModel"
+                      [(ngModel)]="producto.imagen" 
+                      id="imagen" 
+                    >
+                  </div>
                 </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="cereal" id="categoria2">
-                  <label class="form-check-label" for="exampleCheck1">Cereal</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="galletas" id="categoria3">
-                  <label class="form-check-label" for="exampleCheck1">Galletas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="combos" id="categoria4">
-                  <label class="form-check-label" for="exampleCheck1">Combos</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="papitas" id="categoria5">
-                  <label class="form-check-label" for="exampleCheck1">Papitas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="chicles" id="categoria6">
-                  <label class="form-check-label" for="exampleCheck1">Chicles</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="bebidas" id="categoria7">
-                  <label class="form-check-label" for="exampleCheck1">Bebidas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="alimentos" id="categoria8">
-                  <label class="form-check-label" for="exampleCheck1">Alimentos</label>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button onclick="createProduct()" type="button" data-dismiss="modal" class="btn btn-primary">Crear producto</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="sellProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="container">
-            <table class="table table-responsive">
-              <thead>
-                <tr>
-                  <th scope="col">Producto</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Venta</th>
-                  <th scope="col">Confirmar</th>
-                </tr>
-              </thead>
-              <tbody id="bodySell">
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td><input class="form-control" type="number" name="" value=""></td>
-                  <td><button onclick="sellProduct()" type="button" data-dismiss="modal" class="btn btn-primary">Vender</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button onclick="createProduct()" type="button" data-dismiss="modal" class="btn btn-primary">Crear producto</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal edit -->
-  <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div id="create-product" class="container">
-            <form id="createForm">
-              <div class="form-group">
-                <label for="product_name">Nombre del producto</label>
-                <input id="inputV1" type="text" class="form-control" placeholder="Nutella, Pringles, RedBull...">
-              </div>
-              <div class="custom-file">
                 <div class="form-group">
-                  <input type="file" class="" id="inputVIMG">
+                  <label for="description">Descripcion</label>
+                  <input
+                    type="text"
+                    name="description"
+                    #description="ngModel"
+                    [(ngModel)]="producto.description"
+                    class="form-control"
+                    id="description"
+                    placeholder="Descripción del Producto"
+                  >
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="product_description">Descripcion</label>
-                <input id="inputV2" type="text" class="form-control" placeholder="Descripción del Producto">
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_quantity">Cantidad</label>
-                    <input id="inputV3" type="number" min="0" step="1" class="form-control" id="product_quantity" placeholder="Nº de Productos">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="cantidad">Cantidad</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="cantidad"
+                        #cantidad="ngModel"
+                        [(ngModel)]="producto.cantidad"
+                        class="form-control"
+                        id="cantidad"
+                        placeholder="Nº de Productos"
+                      >
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="prioridad">Prioridad</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="prioridad"
+                        #prioridad="ngModel"
+                        [(ngModel)]="producto.prioridad"
+                        class="form-control"
+                        id="prioridad"
+                        placeholder="Nº entre 1 y 10"
+                      >
+                      <small
+                        >La prioridad indica en que orden se muestra el
+                        producto, siendo 1 la maxima (se enseña primero.)</small
+                      >
+                    </div>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_priority">Prioridad</label>
-                    <input id="inputV4" type="number" min="0" step="1" class="form-control" id="product_priority" placeholder="Nº entre 1 y 10">
-                    <small>La prioridad indica en que orden se muestra el producto, siendo 1 la maxima (se enseña primero.)</small>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="precio">Precio</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="precio"
+                        #precio="ngModel"
+                        [(ngModel)]="producto.precio"
+                        class="form-control"
+                        id="precio"
+                        placeholder="$"
+                      >
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="descuento">Descuento</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="descuento"
+                        #descuento="ngModel"
+                        [(ngModel)]="producto.descuento"
+                        class="form-control"
+                        id="descuento"
+                        placeholder="%"
+                      >
+                      <small
+                        >El descuento es un numero entero, el cual representa un
+                        porcentaje de descuento.</small
+                      >
+                      <small>Si se deja vacio es cero</small>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_price">Precio</label>
-                    <input id="inputV5" type="number" min="0" step="1" class="form-control" id="product_price" placeholder="$">
+                <label for="categoria">Categorias</label>
+                <div class="form-group">
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="chocolates"
+                      id="categoria0"
+                    >
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Chocolates</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="dulces"
+                      id="categoria1"
+                    >
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Dulces</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="salados"
+                      id="categoria2"
+                    >
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Salados</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="bebidas"
+                      id="categoria3"
+                    >
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Bebidas</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="combos"
+                      id="categoria4"
+                    >
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Combos</label
+                    >
                   </div>
                 </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="product_discount">Descuento</label>
-                    <input id="inputV6" type="number" min="0" step="1" class="form-control" id="product_discount" placeholder="%">
-                    <small>El descuento es un numero entero, el cual representa un porcentaje de descuento.</small>
-                    <small>Si se deja vacio es cero</small>
-                  </div>
-                </div>
-              </div>
-              <label for="product_discount">Categorias</label>
-              <div class="form-group">
-
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="chocolates" id="categoriaV0">
-                  <label class="form-check-label" for="exampleCheck1">Chocolates</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="gomitas" id="categoriaV1">
-                  <label class="form-check-label" for="exampleCheck1">Gomitas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="cereal" id="categoriaV2">
-                  <label class="form-check-label" for="exampleCheck1">Cereal</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="galletas" id="categoriaV3">
-                  <label class="form-check-label" for="exampleCheck1">Galletas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="combos" id="categoriaV4">
-                  <label class="form-check-label" for="exampleCheck1">Combos</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="papitas" id="categoriaV5">
-                  <label class="form-check-label" for="exampleCheck1">Papitas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="chicles" id="categoriaV6">
-                  <label class="form-check-label" for="exampleCheck1">Chicles</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="bebidas" id="categoriaV7">
-                  <label class="form-check-label" for="exampleCheck1">Bebidas</label>
-                </div>
-                <div class="form-check-inline">
-                  <input type="checkbox" class="form-check-input" value="alimentos" id="categoriaV8">
-                  <label class="form-check-label" for="exampleCheck1">Alimentos</label>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                    type="submit"
+                    data-dismiss="modal"
+                    class="btn btn-primary"
+                    (click)= "onSubmit()"
+                  > 
+                    Crear Producto
+                </button>
+            </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button onclick="editProduct()" type="button" data-dismiss="modal" class="btn btn-primary">Modificar producto</button>
-        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Modal create sess -->
-  <div class="modal fade" id="openMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Panel de administrador</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div id="createProductContainer" class="modal-body">
-          <button data-dismiss="modal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Iniciar sesión
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal create session -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="sellProduct"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="container">
+              <table class="table table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Venta</th>
+                    <th scope="col">Confirmar</th>
+                  </tr>
+                </thead>
+                <tbody id="bodySell">
+                  <tr *ngFor="let producto of productos">
+                    <th scope="row">{{ producto.nombre }}</th>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>
+                      <input
+                        id=""
+                        class="form-control"
+                        type="number"
+                        name=""
+                        value=""
+                      />
+                    </td>
+                    <td>
+                      <button onclick="" type="button" class="btn btn-primary">
+                        Vender
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
+          </div>
+          <div class="modal-footer">
+            <button
+              (click)="createProduct()"
+              type="button"
+              data-dismiss="modal"
+              class="btn btn-primary"
+            >
+              Crear producto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal edit -->
+    <div
+      class="modal fade"
+      id="editProduct"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div id="create-product" class="container">
+              <form id="createForm">
+                <div class="form-group">
+                  <label for="product_name">Nombre del producto</label>
+                  <input
+                    id="inputV1"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nutella, Pringles, RedBull..."
+                  />
+                </div>
+                <div class="custom-file">
+                  <div class="form-group">
+                    <input type="file" class="" id="inputVIMG" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="product_description">Descripcion</label>
+                  <input
+                    id="inputV2"
+                    type="text"
+                    class="form-control"
+                    placeholder="Descripción del Producto"
+                  />
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="product_quantity">Cantidad</label>
+                      <input
+                        id="inputV3"
+                        type="number"
+                        min="0"
+                        step="1"
+                        class="form-control"
+                        placeholder="Nº de Productos"
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="prioridad">Prioridad</label>
+                      <input
+                        id="inputV4"
+                        type="number"
+                        min="0"
+                        step="1"
+                        class="form-control"
+                        placeholder="Nº entre 1 y 10"
+                      />
+                      <small
+                        >La prioridad indica en que orden se muestra el
+                        producto, siendo 1 la maxima (se enseña primero.)</small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="precio">Precio</label>
+                      <input
+                        id="inputV5"
+                        type="number"
+                        min="0"
+                        step="1"
+                        class="form-control"
+                        placeholder="$"
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="descuento">Descuento</label>
+                      <input
+                        id="inputV6"
+                        type="number"
+                        min="0"
+                        step="1"
+                        class="form-control"
+                        placeholder="%"
+                      />
+                      <small
+                        >El descuento es un numero entero, el cual representa un
+                        porcentaje de descuento.</small
+                      >
+                      <small>Si se deja vacio es cero</small>
+                    </div>
+                  </div>
+                </div>
+                <label for="categoria">Categorias</label>
+                <div class="form-group">
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="chocolates"
+                      id="categoriaV0"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Chocolates</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="dulces"
+                      id="categoriaV1"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Dulces</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="salados"
+                      id="categoriaV2"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Salados</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="bebidas"
+                      id="categoriaV3"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Bebidas</label
+                    >
+                  </div>
+                  <div class="form-check-inline">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      value="combos"
+                      id="categoriaV4"
+                    />
+                    <label class="form-check-label" for="exampleCheck1"
+                      >Combos</label
+                    >
+                  </div>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" onclick="loginOnClick()" data-dismiss="modal" class="btn btn-primary">Entrar</button>
+          </div>
+          <div class="modal-footer">
+            <button
+              (click)="editProduct()"
+              type="button"
+              data-dismiss="modal"
+              class="btn btn-primary"
+            >
+              Modificar producto
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Modal buy product -->
-  <div class="modal fade" id="buyInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Compra tu chuche</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+
+    <!-- Modal create sess -->
+    <div
+      class="modal fade"
+      id="openMenu"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Panel de administrador
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="createProductContainer" class="modal-body">
+            <button
+              data-dismiss="modal"
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#createProduct"
+            >
+              Crear producto
+            </button>
+            <br />
+            <button
+              data-dismiss="modal"
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#sellProduct"
+            >
+              Ventas
+            </button>
+            <br />
+            <button
+              (click)="logout()"
+              data-dismiss="modal"
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+            >
+              Cerrar sesión
+            </button>
+          </div>
         </div>
-        <div class="modal-body">
-          <h2>Pasos para la compra:</h2>
-          <ul>
-            <li>Cuando tengas tu pedido escribe al 04140114333 (Link WhatsApp: <a href="https://bit.ly/3e3SkYY">https://bit.ly/3e3SkYY</a>)</li>
-            <li>Se aceptan pago en bolívares a partir de 5$, tenemos cuentas Mercantil, Proncincial y pago móvil (a lo que indique monitor dolar).</li>
-            <li>Aceptamos pagos en dólares por Zelle y efectivo.</li>
-            <li>Aceptamos euros en efectivo.</li>
-            <li>Aceptamos monedas a partir de 1 (€ o $) en adelante.</li>
-          </ul>
-
-
-
-        </div>
-
       </div>
     </div>
+
+    <!-- Modal buy product -->
+    <div
+      class="modal fade"
+      id="buyInfo"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Compra tu chuche</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2>Pasos para la compra:</h2>
+            <ul>
+              <li>
+                Cuando tengas tu pedido escribe al 04140114333 (Link WhatsApp:
+                <a href="https://bit.ly/3e3SkYY">https://bit.ly/3e3SkYY</a>)
+              </li>
+              <li>
+                Se aceptan pago en bolívares a partir de 5$, tenemos cuentas
+                Mercantil, Proncincial y pago móvil (a lo que indique monitor
+                dolar).
+              </li>
+              <li>Aceptamos pagos en dólares por Zelle y efectivo.</li>
+              <li>Aceptamos euros en efectivo.</li>
+              <li>Aceptamos monedas a partir de 1 (€ o $) en adelante.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-transparent">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="modal"
+        data-target="#openMenu"
+      >
+        <i class="iIcon fas fa-bars"></i>
+      </button>
+      <img
+        src="/assets/img/logo.png"
+        class="img-fluid logo-nav levitar"
+        alt=""
+      />
+    </nav>
   </div>
-  <nav class="navbar navbar-transparent">
-    <button class="navbar-toggler" type="button" data-toggle="modal" data-target="#openMenu">
-      <i class="iIcon fas fa-bars"></i>
-    </button>
-    <img  src="img/logo.png" class="img-fluid logo-nav levitar" alt="">
-  </nav>
+  <section class="full-wh full-h-to-auto">
+    <div class="welcome-header container-fluid">
+      <h2>Bienvenido a</h2>
+      <h1>Pide Tu Chuche</h1>
+    </div>
+    <div class="search-form">
+      <h1>Nuestro Catálogo</h1>
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          (keyup)="filterProduct($event)"
+          class="form-control"
+          type="text"
+          placeholder="Busca tu chuche"
+        />
+      </form>
+    </div>
+    <div class="category-filter">
+      <div *ngFor="let categoria of categorias">
+        <button (click)="filterTag(categoria.nombre)" type ="button">{{categoria.nombre}}</button>
+      </div>  
+      <button (click)="filterTag('todo')" type="button">TODO</button>
+    </div>
+    <div class="second-section">
+      <div *ngIf="filterProducts == undefined">
+        <app-producto 
+          [productos]="productos"
+          (shouldEdit)= "shouldEdit($event)"
+        ></app-producto>
+      </div>
+      <div *ngIf="filterProducts != undefined">
+        <app-producto 
+          [productos]="filterProducts"
+          (shouldEdit)= "shouldEdit($event)"
+        ></app-producto>
+      </div>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
 </div>

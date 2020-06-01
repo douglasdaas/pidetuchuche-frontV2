@@ -1,4 +1,4 @@
-export class categoria{
+export class Categoria{
     constructor(
         public nombre:string,
         public created_at:any,
