@@ -1,5 +1,5 @@
 <section class="full-wh full-h-to-auto first-section"></section>
-<a onclick="scrollHeight();" class="arrow-wrap" href="">
+<a  class="arrow-wrap" href="">
   <i class="fas fa-arrow-down"></i>
   <!--<span class="hint">scroll</span>-->
 </a>
@@ -238,7 +238,7 @@
                       <input
                         class="form-control"
                         type="number"
-                        ng-attr-id="{{ 'sellQuantity' + producto.id }}
+                        id="{{ producto.id }}"
 
                       />
                     </td>
@@ -251,16 +251,6 @@
                 </tbody>
               </table>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              (click)="createProduct()"
-              type="button"
-              data-dismiss="modal"
-              class="btn btn-primary"
-            >
-              Crear producto
-            </button>
           </div>
         </div>
       </div>
@@ -297,7 +287,7 @@
           </div>
           <div class="modal-footer">
             <button
-              onclick="editPDF()"
+              (click)="editPDF()"
               type="button"
               data-dismiss="modal"
               class="btn btn-primary"

@@ -287,7 +287,7 @@ export class AdminComponent implements OnInit {
   }
 
   sellProduct(producto){
-    const sellQuantity = document.getElementById('sellQuantity'+ producto.id) as HTMLInputElement;
+    const sellQuantity = document.getElementById(producto.id) as HTMLInputElement;
     const productData = new FormData();
 
     productData.append("cantidad", sellQuantity.value);
@@ -352,4 +352,6 @@ export class AdminComponent implements OnInit {
       }
     );
   }
+
+
 }
