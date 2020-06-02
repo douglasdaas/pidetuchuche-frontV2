@@ -6,13 +6,15 @@ import { ActivatedRoute, Router, Event } from '@angular/router';
 import * as AOS from 'aos';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { PdfService } from 'src/app/services/pdf/pdf.service';
+import { pdf } from 'src/app/models/pdf';
 declare var $: any;
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  providers: [ UserService, ProductoService ]
+  providers: [ UserService, ProductoService, PdfService ]
 })
 export class AdminComponent implements OnInit {
   public productos: Array<Producto>;
@@ -20,6 +22,7 @@ export class AdminComponent implements OnInit {
   public categorias: Array<Categoria>;
   public filterProducts: Array<Producto>;
   public token;
+  public pdf: pdf;
   public idProducto: number;
 
   constructor(
@@ -32,7 +35,8 @@ export class AdminComponent implements OnInit {
     // tslint:disable-next-line:variable-name
     private _categoriaService: CategoriaService,
     // tslint:disable-next-line:variable-name
-    private _userService: UserService
+    private _userService: UserService,
+    private _pdfService: PdfService
   ) {
       this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null);
   }
@@ -44,17 +48,12 @@ export class AdminComponent implements OnInit {
     AOS.init();
     AOS.refresh();
     this.token = this._userService.getToken();
-    this._categoriaService.getCategorias().subscribe(
-      response => {
-        if ( response.mensaje = 'Lista de todas las categorias.') {
-          this.categorias = response.datos;
-        }
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.getCategorys();
+    this.getProducts();
+    this.getPDFURL();
+  }
+
+  getProducts(){
     this._productoService.getProductos().subscribe(
       response => {
         if ( response.mensaje = 'Lista de todos los productos') {
@@ -66,7 +65,20 @@ export class AdminComponent implements OnInit {
         console.log(error);
       }
     );
+  }
 
+  getCategorys(){
+    this._categoriaService.getCategorias().subscribe(
+      response => {
+        if ( response.mensaje = 'Lista de todas las categorias.') {
+          this.categorias = response.datos;
+        }
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   filterTag(nombreCategoria) {
@@ -113,6 +125,7 @@ export class AdminComponent implements OnInit {
 
   }
 
+  // Crear nuevo Producto
   onSubmit() {
     // tslint:disable-next-line:variable-name
     const product_category = [];
@@ -163,6 +176,8 @@ export class AdminComponent implements OnInit {
         console.log(error as any);
       }
     );
+
+    this.getProducts();
   }
 
   test(event) {
@@ -264,21 +279,30 @@ export class AdminComponent implements OnInit {
       }
     );
 
-    this._productoService.getProductos().subscribe(
-      response => {
-        if ( response.mensaje === 'Lista de todos los productos') {
-          this.productos = response.datos;
-        }
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.getProducts();
   }
 
   shouldEdit(id) {
     this.idProducto = id;
+  }
+
+  sellProduct(producto){
+    const sellQuantity = document.getElementById('sellQuantity'+ producto.id) as HTMLInputElement;
+    const productData = new FormData();
+
+    productData.append("cantidad", sellQuantity.value);
+
+    this._productoService.sellProduct(this.token,producto.id,productData).subscribe(
+      response =>{
+        console.log(response);
+        alert(sellQuantity.value +' Producto vendido');
+        this.getProducts();
+      },
+      error =>{
+        console.log(<any>error);
+      }
+    );
+
   }
 
   clearProduct() {
@@ -292,5 +316,40 @@ export class AdminComponent implements OnInit {
     this.producto.cantidad = 0;
     this.producto.descuento = 0;
 
+  }
+
+  editPDF(){
+    const pdfData = new FormData();
+
+    if ( $('#pdfFile').prop('files')[0] !== undefined ) {
+      pdfData.append('imagen', $('#pdfFile').prop('files')[0]);
+    }
+
+    this._pdfService.editPDF(this.token, pdfData).subscribe(
+      response =>{
+        alert('PDF Actualizado');
+      },
+      error =>{
+        console.log(<any> error);
+      }
+    );
+  }
+
+  showPDF(){
+    window.location.replace(this.pdf.ruta);
+  }
+
+  getPDFURL(){
+    this._pdfService.getPDFURL().subscribe(
+      response =>{
+        if(response.mensaje = 'Micelaneo encontrado correctamente.'){
+          this.pdf = response.datos;
+        }
+        console.log(response);
+      },
+      error =>{
+        console.log( <any>error);
+      }
+    );
   }
 }

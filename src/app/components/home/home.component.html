@@ -57,6 +57,19 @@
         <button (click)="filterTag(categoria.nombre)" type ="button">{{categoria.nombre}}</button>
       </div>  
       <button (click)="filterTag('todo')" type="button">TODO</button>
+      <div>
+        <a href="#">
+          <button 
+            style="color: rgba(0, 0, 0, 0.98); 
+                    background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;" 
+            (click)="showPDF()" 
+            type='button'
+          >
+            Catalogo PDF
+          </button>
+        </a>
+      </div>
+
     </div>
     <div class="second-section">
       <div *ngIf="filterProducts == undefined">

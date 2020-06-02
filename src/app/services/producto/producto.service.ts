@@ -38,6 +38,7 @@ export class ProductoService {
     return this._http.get(this.url + '/productos' + id );
   }
 
+
   // Crear un producto
   createProduct(token, producto) {
     const headers = new HttpHeaders().set('Authorization', token);
@@ -51,6 +52,14 @@ export class ProductoService {
     const headers = new HttpHeaders().set('Authorization', token);
 
     return this._http.patch(this.url + '/productos/' + id, data, {headers});
+  }
+
+  // Vender Producto
+  sellProduct(token, id ,producto){
+    const headers = new HttpHeaders().set('Authorization', token);
+
+    return this._http.post(this.url + '/productos/venta/' + id , producto, { headers});
+
   }
 
   // Borrar un producto 

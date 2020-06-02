@@ -1,10 +1,8 @@
-
-<section class="full-wh full-h-to-auto first-section">
-</section>
+<section class="full-wh full-h-to-auto first-section"></section>
 <a onclick="scrollHeight();" class="arrow-wrap" href="">
-    <i class="fas fa-arrow-down"></i>
-    <!--<span class="hint">scroll</span>-->
-  </a>
+  <i class="fas fa-arrow-down"></i>
+  <!--<span class="hint">scroll</span>-->
+</a>
 
 <div class="opacity">
   <div class="pos-f-t">
@@ -33,19 +31,18 @@
                     [(ngModel)]="producto.nombre"
                     id="nombre"
                     placeholder="Nutella, Pringles, RedBull..."
-
-                  >
+                  />
                 </div>
                 <div class="custom-file">
                   <div class="form-group">
-                    <input 
-                      type="file" 
+                    <input
+                      type="file"
                       class=""
                       name="imagen"
                       #imagen="ngModel"
-                      [(ngModel)]="producto.imagen" 
-                      id="imagen" 
-                    >
+                      [(ngModel)]="producto.imagen"
+                      id="imagen"
+                    />
                   </div>
                 </div>
                 <div class="form-group">
@@ -58,7 +55,7 @@
                     class="form-control"
                     id="description"
                     placeholder="Descripción del Producto"
-                  >
+                  />
                 </div>
                 <div class="row">
                   <div class="col">
@@ -74,7 +71,7 @@
                         class="form-control"
                         id="cantidad"
                         placeholder="Nº de Productos"
-                      >
+                      />
                     </div>
                   </div>
                   <div class="col">
@@ -90,7 +87,7 @@
                         class="form-control"
                         id="prioridad"
                         placeholder="Nº entre 1 y 10"
-                      >
+                      />
                       <small
                         >La prioridad indica en que orden se muestra el
                         producto, siendo 1 la maxima (se enseña primero.)</small
@@ -112,7 +109,7 @@
                         class="form-control"
                         id="precio"
                         placeholder="$"
-                      >
+                      />
                     </div>
                   </div>
                   <div class="col">
@@ -128,7 +125,7 @@
                         class="form-control"
                         id="descuento"
                         placeholder="%"
-                      >
+                      />
                       <small
                         >El descuento es un numero entero, el cual representa un
                         porcentaje de descuento.</small
@@ -145,7 +142,7 @@
                       class="form-check-input"
                       value="chocolates"
                       id="categoria0"
-                    >
+                    />
                     <label class="form-check-label" for="exampleCheck1"
                       >Chocolates</label
                     >
@@ -156,7 +153,7 @@
                       class="form-check-input"
                       value="dulces"
                       id="categoria1"
-                    >
+                    />
                     <label class="form-check-label" for="exampleCheck1"
                       >Dulces</label
                     >
@@ -167,7 +164,7 @@
                       class="form-check-input"
                       value="salados"
                       id="categoria2"
-                    >
+                    />
                     <label class="form-check-label" for="exampleCheck1"
                       >Salados</label
                     >
@@ -178,7 +175,7 @@
                       class="form-check-input"
                       value="bebidas"
                       id="categoria3"
-                    >
+                    />
                     <label class="form-check-label" for="exampleCheck1"
                       >Bebidas</label
                     >
@@ -189,7 +186,7 @@
                       class="form-check-input"
                       value="combos"
                       id="categoria4"
-                    >
+                    />
                     <label class="form-check-label" for="exampleCheck1"
                       >Combos</label
                     >
@@ -199,13 +196,13 @@
             </div>
             <div class="modal-footer">
               <button
-                    type="submit"
-                    data-dismiss="modal"
-                    class="btn btn-primary"
-                    (click)= "onSubmit()"
-                  > 
-                    Crear Producto
-                </button>
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary"
+                (click)="onSubmit()"
+              >
+                Crear Producto
+              </button>
             </div>
           </div>
         </div>
@@ -239,15 +236,14 @@
                     <td>{{ producto.cantidad }}</td>
                     <td>
                       <input
-                        id=""
                         class="form-control"
                         type="number"
-                        name=""
-                        value=""
+                        ng-attr-id="{{ 'sellQuantity' + producto.id }}
+
                       />
                     </td>
                     <td>
-                      <button onclick="" type="button" class="btn btn-primary">
+                      <button (click)="sellProduct(producto)" type="button" class="btn btn-primary">
                         Vender
                       </button>
                     </td>
@@ -269,6 +265,50 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal PDF -->
+    <div
+      class="modal fade"
+      id="PDF"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div id="create-product" class="container">
+              <form id="createForm">
+                <div class="form-group">
+                  <label for="product_name">Catalogo PDF</label>
+                </div>
+                <div class="custom-file">
+                  <div class="form-group">
+                    <label for="product_name">Archivo</label>
+                    <input type="file" class="" value="" id="pdfFile" />
+                  </div>
+                </div>
+              </form>
+              <small style="text-align: right !important;"
+                >Espera que salga una alerta con "PDF actualizado"</small
+              >
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="editPDF()"
+              type="button"
+              data-dismiss="modal"
+              class="btn btn-primary"
+            >
+              Modificar PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal edit -->
     <div
       class="modal fade"
@@ -492,6 +532,16 @@
             </button>
             <br />
             <button
+              data-dismiss="modal"
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#PDF"
+            >
+              Subir PDF
+            </button>
+            <br />
+            <button
               (click)="logout()"
               data-dismiss="modal"
               type="button"
@@ -580,24 +630,36 @@
     </div>
     <div class="category-filter">
       <div *ngFor="let categoria of categorias">
-        <a href="">
-
-          <button (click)="filterTag(categoria.nombre)" type ="button">{{categoria.nombre}}</button>
+        <a >
+          <button (click)="filterTag(categoria.nombre)" type="button">
+            {{ categoria.nombre }}
+          </button>
         </a>
-      </div>  
+        
+      </div>
       <button (click)="filterTag('todo')" type="button">TODO</button>
+      <a >
+        <button
+          style="color: rgba(0, 0, 0, 0.98); 
+                  background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;"
+          (click)="showPDF()" 
+          type="button"
+        >
+          Catalogo PDF
+        </button>
+      </a>
     </div>
     <div class="second-section">
       <div *ngIf="filterProducts == undefined">
-        <app-producto 
+        <app-producto
           [productos]="productos"
-          (shouldEdit)= "shouldEdit($event)"
+          (shouldEdit)="shouldEdit($event)"
         ></app-producto>
       </div>
       <div *ngIf="filterProducts != undefined">
-        <app-producto 
+        <app-producto
           [productos]="filterProducts"
-          (shouldEdit)= "shouldEdit($event)"
+          (shouldEdit)="shouldEdit($event)"
         ></app-producto>
       </div>
     </div>

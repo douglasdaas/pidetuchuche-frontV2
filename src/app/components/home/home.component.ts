@@ -5,50 +5,35 @@ import { Categoria } from 'src/app/models/categoria';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto/producto.service';
 import * as AOS from 'aos';
+import { PdfService } from 'src/app/services/pdf/pdf.service';
+import { pdf } from 'src/app/models/pdf';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [  UserService, ProductoService ]
+  providers: [  UserService, ProductoService, PdfService ]
 })
 export class HomeComponent implements OnInit {
+  public pdf: pdf;
   public filterProducts: Array<Producto>;
   public categorias: Array<Categoria>;
   public productos: Array<Producto>;
 
   constructor(
     private _categoriaService:CategoriaService,
-    private _productoService: ProductoService
+    private _productoService: ProductoService,
+    private _pdfService: PdfService
   ) { }
 
   ngOnInit() {
     AOS.init();
     AOS.refresh();
-    this._categoriaService.getCategorias().subscribe(
-      response => {
-        if ( response.mensaje = 'Lista de todas las categorias.'){
-          this.categorias = response.datos;
-        }
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    
-   this._productoService.getProductos().subscribe(
-    response => {
-      if ( response.mensaje = 'Lista de todos los productos'){
-        this.productos = response.datos;
-      }
-      console.log(response);
-    },
-    error => {
-      console.log(error);
-    }
-  );
+    this.getCategorys();
+    this.getProducts();
+    this.getPDFURL();
   }
+
   filterTag(nombreCategoria){
     let filterByCategory = new Array<Producto>();
     if (nombreCategoria == 'todo'){
@@ -84,4 +69,49 @@ export class HomeComponent implements OnInit {
 
   }
 
+  getProducts(){
+    this._productoService.getProductos().subscribe(
+      response => {
+        if ( response.mensaje = 'Lista de todos los productos') {
+          this.productos = response.datos;
+        }
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getCategorys(){
+    this._categoriaService.getCategorias().subscribe(
+      response => {
+        if ( response.mensaje = 'Lista de todas las categorias.') {
+          this.categorias = response.datos;
+        }
+        console.log(response);
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+  }
+
+  showPDF(){
+    window.location.replace(this.pdf.ruta);
+  }
+
+  getPDFURL(){
+    this._pdfService.getPDFURL().subscribe(
+      response =>{
+        if(response.mensaje = 'Micelaneo encontrado correctamente.'){
+          this.pdf = response.datos;
+        }
+        console.log(response);
+      },
+      error =>{
+        console.log( <any>error);
+      }
+    );
+  }
 }
