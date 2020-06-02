@@ -8,7 +8,8 @@
   }
 
   .first-section {
-    background-image: url("../assets/img/fondo.jpg");
+    /* background-image: url("../assets/img/fondo.jpg"); */
+    background-color: #ff799a;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -19,7 +20,11 @@
     justify-content: flex-start;
     align-items: center;
   }
-  
+
+  .first-section img {
+    width: 100vw;
+  }
+
   .first-section img {
     width: 100vw;
   }
@@ -35,6 +40,28 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+    }
+
+    .arrow-wrap {
+      position: absolute;
+      z-index: 1;
+      left: 83%;
+      top: 195em;
+      margin-left: -5em;
+      background: #fff0;
+      width: 20em;
+      height: 20em;
+      padding: 4em 2em;
+      border-radius: 50%;
+      font-size: 0.5em;
+      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .arrow-wrap i {
+      font-size: 70px;
+      color: black;
     }
     .full-h-to-auto {
       height: auto;

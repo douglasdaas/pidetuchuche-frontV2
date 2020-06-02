@@ -1,42 +1,55 @@
-<div class="container-fluid ">
-  <div class="full-wh full-h-to-auto">
-    <div class="col-md-6">
+<section class="full-wh full-h-to-auto first-section">
+
+  <div class="modal-dialog text-center">
+    <div class="col-md-12 main-section">
+      
       <div class="alert alert-success" *ngIf="status == 'success'">
         Has iniciado sesion correctamente
       </div>
       <div class="alert alert-danger" *ngIf="status == 'error'">
         Usuario o Clave no valida
       </div>
-      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col-md-5">
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
-          placeholder="Email" class="form-control" required />
-          <span *ngIf="!email.valid && email.touched">
-            El email no es valido
-          </span>
+      <div class="modal-content">
+  
+        <div class="col-12 user-img">
+          <img src="../../../assets/img/logo.png" alt="">
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input 
-            type="password" 
-            name="password" 
-            #password="ngModel" 
-            placeholder="Password"
-            [(ngModel)]="user.password" 
-            class="form-control"
-            required 
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col-12">
+          <div class="form-group" id="user-group">
+            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+            placeholder="Email address" class="form-control" required /><i class="fas fa-user"></i>
+            
+          </div>
+          <div class="form-group" id="contrasena-group">
+            <input 
+              type="password" 
+              name="password" 
+              #password="ngModel" 
+              placeholder="Password"
+              [(ngModel)]="user.password" 
+              class="form-control"
+              required 
+              ><i class="fas fa-lock"></i>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!loginForm.form.valid"
             >
-          <span *ngIf="!password.valid && password.touched">
-            La clave no es valida 
-          </span>
-        </div>
-        <div>
-          <input type="submit" value="Iniciar sesion" class="btn btn-primary"
-          [disabled]="!loginForm.form.valid" >
-        </div>
-      </form>
-      
+            <i class="fas fa-sign-in-alt"></i>  Iniciar Sesion 
+            </button>
+            
+          </div>
+        </form>
+  
+      </div>
+      <div class="modal-footer">
+
+      </div>
     </div>
   </div>
-</div>
+</section>
+  
+  
+

@@ -46,7 +46,7 @@ export class AdminComponent implements OnInit {
     this.token = this._userService.getToken();
     this._categoriaService.getCategorias().subscribe(
       response => {
-        if ( response.mensaje === 'Lista de todas las categorias.') {
+        if ( response.mensaje = 'Lista de todas las categorias.') {
           this.categorias = response.datos;
         }
         console.log(response);
@@ -57,7 +57,7 @@ export class AdminComponent implements OnInit {
     );
     this._productoService.getProductos().subscribe(
       response => {
-        if ( response.mensaje === 'Lista de todos los productos') {
+        if ( response.mensaje = 'Lista de todos los productos') {
           this.productos = response.datos;
         }
         console.log(response);

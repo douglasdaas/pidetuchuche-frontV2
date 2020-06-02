@@ -12,22 +12,33 @@ export class ProductoService {
     // tslint:disable-next-line:variable-name
     public _http: HttpClient
   ) {
-    this.url = GLOBAL.urlLocal;
+
+  this.url = GLOBAL.url;
+
   }
+
   pruebas() {
     return 'Hola Mundo';
   }
+
   // Obtener todos los productos
   getProductos(): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this._http.get(this.url + '/productos', { headers});
 
   }
+
+  // Obtener los productos del Slider Principal
+  getSliderPrincipal(): Observable<any> {
+    return this._http.get(this.url + '/productos-principal')
+  }
+
   // Obtener productos de una categoria
   getProductosByCategory(id): Observable<any> {
     return this._http.get(this.url + '/productos' + id );
   }
 
+  // Crear un producto
   createProduct(token, producto) {
     const headers = new HttpHeaders().set('Authorization', token);
 
@@ -35,12 +46,14 @@ export class ProductoService {
 
   }
 
+  // Editar un producto
   editProduct(token, id, data) {
     const headers = new HttpHeaders().set('Authorization', token);
 
     return this._http.patch(this.url + '/productos/' + id, data, {headers});
   }
 
+  // Borrar un producto 
   deleteProduct(token, producto) {
     const headers = new HttpHeaders().set('Authorization', token);
 
