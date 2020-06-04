@@ -13,7 +13,7 @@ export class ProductoService {
     public _http: HttpClient
   ) {
 
-  this.url = GLOBAL.urlLocal;
+  this.url = GLOBAL.urlTest;
 
   }
 
@@ -63,7 +63,7 @@ export class ProductoService {
 
   }
 
-  // Borrar un producto 
+  // Borrar un producto
   deleteProduct(token, producto) {
     const headers = new HttpHeaders().set('Authorization', token);
 

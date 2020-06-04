@@ -13,8 +13,8 @@ export class UserService {
   public token;
   constructor(
     public _http: HttpClient
-  ) { 
-    this.url = GLOBAL.urlLocal;
+  ) {
+    this.url = GLOBAL.urlTest;
   }
 
   signup( user): Observable<any> {

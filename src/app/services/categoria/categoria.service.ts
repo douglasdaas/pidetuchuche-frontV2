@@ -11,8 +11,8 @@ export class CategoriaService {
   public url:string;
 constructor(
   public _http:HttpClient
-) { 
-  this.url = GLOBAL.url;
+) {
+  this.url = GLOBAL.urlTest;
 }
 
 //Obtener todas las categorias
