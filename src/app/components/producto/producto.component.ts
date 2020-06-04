@@ -34,8 +34,11 @@ export class ProductoComponent implements OnInit {
   ngOnInit() {
     AOS.init();
     AOS.refresh();
-    this.token = this._userService.getToken();
-    console.log( this._productoService.pruebas());
+
+    if (this._userService.getToken()){
+      this.token = this._userService.getToken();
+    }
+    //console.log( this._productoService.pruebas());
 
   }
 
@@ -143,4 +146,5 @@ export class ProductoComponent implements OnInit {
       );
     }
   }
+
 }
