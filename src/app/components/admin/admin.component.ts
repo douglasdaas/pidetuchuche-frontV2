@@ -54,14 +54,13 @@ export class AdminComponent implements OnInit {
     this.getCategorys();
     this.getProducts();
 
-
   }
 
-  getProducts() {
+  getProducts(){
     this._productoService.getProductos().subscribe(
       response => {
         if ( response.mensaje = 'Lista de todos los productos') {
-          this.productos = response.datos.data;
+          this.productos = response.datos;
         }
         console.log(response);
       },
