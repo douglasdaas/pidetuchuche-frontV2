@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     AOS.refresh();
     this.getCategorys();
     this.getProducts();
-    this.getPDFURL();
   }
 
   filterTag(nombreCategoria){
@@ -113,5 +112,7 @@ export class HomeComponent implements OnInit {
         console.log( <any>error);
       }
     );
+
+    this.showPDF();
   }
 }

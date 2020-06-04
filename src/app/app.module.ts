@@ -13,8 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { SliderPrincipalComponent } from './components/sliderPrincipal/sliderPrincipal.component';
-import {HeaderComponent} from './components/header/header.component';
-import {NavbarComponent} from './components/navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,9 +22,7 @@ import {NavbarComponent} from './components/navbar/navbar.component';
     LoginComponent,
     FooterComponent,
     ProductoComponent,
-    SliderPrincipalComponent,
-    HeaderComponent,
-    NavbarComponent
+    SliderPrincipalComponent
   ],
   imports: [
     BrowserModule,

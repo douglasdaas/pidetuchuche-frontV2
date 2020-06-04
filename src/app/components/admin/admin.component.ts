@@ -53,7 +53,6 @@ export class AdminComponent implements OnInit {
     this.token = this._userService.getToken();
     this.getCategorys();
     this.getProducts();
-    this.getPDFURL();
 
 
   }
@@ -356,6 +355,8 @@ export class AdminComponent implements OnInit {
         console.log( <any>error);
       }
     );
+
+    this.showPDF();
   }
 
 
