@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GLOBAL } from '../global';
 
@@ -23,8 +23,9 @@ export class ProductoService {
 
   // Obtener todos los productos
   getProductos(): Observable<any> {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this._http.get(this.url + '/productos', { headers});
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    // const params = new HttpParams().set('params',page);
+    return this._http.get(this.url + '/productos', { headers: headers});
 
   }
 
@@ -43,7 +44,7 @@ export class ProductoService {
   createProduct(token, producto) {
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this._http.post(this.url + '/productos' , producto, { headers});
+    return this._http.post(this.url + '/productos' , producto, { headers: headers});
 
   }
 
@@ -51,14 +52,14 @@ export class ProductoService {
   editProduct(token, id, data) {
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this._http.patch(this.url + '/productos/' + id, data, {headers});
+    return this._http.patch(this.url + '/productos/' + id, data, {headers: headers});
   }
 
   // Vender Producto
   sellProduct(token, id ,producto){
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this._http.post(this.url + '/productos/venta/' + id , producto, { headers});
+    return this._http.post(this.url + '/productos/venta/' + id , producto, { headers: headers});
 
   }
 
@@ -66,7 +67,7 @@ export class ProductoService {
   deleteProduct(token, producto) {
     const headers = new HttpHeaders().set('Authorization', token);
 
-    return this._http.delete(this.url + '/productos/' + producto.id , {headers});
+    return this._http.delete(this.url + '/productos/' + producto.id , {headers: headers});
   }
 
 }

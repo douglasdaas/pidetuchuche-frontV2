@@ -17,7 +17,7 @@ constructor(
 
 //Obtener todas las categorias
 getCategorias():Observable<any>{
-  let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+  let headers = new HttpHeaders().set('Content-Type', 'application/json');
   return this._http.get(this.url + '/categorias',{ headers: headers});
 }
 

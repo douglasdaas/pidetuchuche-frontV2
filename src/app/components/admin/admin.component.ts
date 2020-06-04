@@ -18,6 +18,8 @@ declare var $: any;
 })
 export class AdminComponent implements OnInit {
   public productos: Array<Producto>;
+  public page: number;
+  public perPage: number;
   public producto: Producto;
   public categorias: Array<Categoria>;
   public filterProducts: Array<Producto>;
@@ -51,13 +53,15 @@ export class AdminComponent implements OnInit {
     this.getCategorys();
     this.getProducts();
     this.getPDFURL();
+
+    
   }
 
   getProducts(){
     this._productoService.getProductos().subscribe(
       response => {
         if ( response.mensaje = 'Lista de todos los productos') {
-          this.productos = response.datos;
+          this.productos = response.datos.data;
         }
         console.log(response);
       },

@@ -1,4 +1,9 @@
+<div class="loading" *ngIf="!productos">
+  <i class='icon-spinner icon-spin icon-large'></i>
+</div>
+
 <div class="container-fluid container-products" *ngIf="productos">
+  
   <div *ngFor="let producto of productos">
     <div data-aos-offset="200" data-aos="flip-up" class="wrapper cards">
       <div class="row">

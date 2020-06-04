@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { SliderPrincipalComponent } from './components/sliderPrincipal/sliderPrincipal.component';
-
 @NgModule({
   declarations: [
     AppComponent,
