@@ -38,6 +38,7 @@ export class AdminComponent implements OnInit {
     private _categoriaService: CategoriaService,
     // tslint:disable-next-line:variable-name
     private _userService: UserService,
+    // tslint:disable-next-line:variable-name
     private _pdfService: PdfService
   ) {
       this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null);
@@ -54,10 +55,10 @@ export class AdminComponent implements OnInit {
     this.getProducts();
     this.getPDFURL();
 
-    
+
   }
 
-  getProducts(){
+  getProducts() {
     this._productoService.getProductos().subscribe(
       response => {
         if ( response.mensaje = 'Lista de todos los productos') {
