@@ -5,12 +5,11 @@
     "ng": "ng",
     "serve": "ng serve",
     "start": "node src/server.js",
-    "build": "ng build && gzipper --verbose ./dist",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lite": "lite-server",
-    "postinstall": "ng build --prod && gzipper --verbose ./dist"
+    "lite": "lite-server"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +26,6 @@
     "@popperjs/core": "^2.4.0",
     "aos": "^3.0.0-beta.6",
     "bootstrap": "^4.4.1",
-    "compression": "^1.7.4",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
     "path": "^0.12.7",
@@ -44,10 +42,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.3.38",
     "@types/node": "~8.9.4",
-    "brotli-webpack-plugin": "^1.1.0",
     "codelyzer": "^5.0.0",
-    "compression-webpack-plugin": "^4.0.0",
-    "gzipper": "^3.7.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^5.0.4",
