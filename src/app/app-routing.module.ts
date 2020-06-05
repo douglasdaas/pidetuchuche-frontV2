@@ -8,7 +8,7 @@ const routes: Routes = [
   { path:'', component: HomeComponent, 
     pathMatch: 'full',
     loadChildren:()=> import('./home/home.module').then(mod => mod.HomeModule) },
-  { path:'admin', component: AdminComponent, pathMatch: 'full',
+  { path:'admin', pathMatch: 'full',
     loadChildren:()=> import('./admin/admin.module').then(mod => mod.AdminModule)},
   { path:'**', redirectTo: '', pathMatch: 'full' }
 ];

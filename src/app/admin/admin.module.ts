@@ -14,8 +14,8 @@ import { HomeModule } from '../home/home.module';
   imports: [
     CommonModule,
     FormsModule,
-    HomeModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    HomeModule
   ]
 })
 export class AdminModule { }
