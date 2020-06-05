@@ -6,11 +6,11 @@ export const environment = {
   production: false
 };
 
-export const GLOBAL ={
+export const GLOBAL = {
     url: 'https://pidetuchuche-backend.herokuapp.com',
     urlLocal: 'http://127.0.0.1:3334',
     urlTest : 'https://pidetuchuche-test-backend.herokuapp.com'
-}
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
