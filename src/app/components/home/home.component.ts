@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   public productos: Array<Producto>;
 
   constructor(
-    private _categoriaService:CategoriaService,
+    private _categoriaService: CategoriaService,
     private _productoService: ProductoService,
     private _pdfService: PdfService
   ) { }
@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     AOS.refresh();
     this.getCategorys();
     this.getProducts();
-    this.getPDFURL();
   }
 
   filterTag(nombreCategoria){
@@ -51,7 +50,7 @@ export class HomeComponent implements OnInit {
             filterByCategory.push(producto);
             agregar = false;
           }
-          
+
         }
       });
       this.filterProducts = filterByCategory;
@@ -65,7 +64,7 @@ export class HomeComponent implements OnInit {
         return producto;
       }
     });
-    
+
 
   }
 
@@ -113,5 +112,7 @@ export class HomeComponent implements OnInit {
         console.log( <any>error);
       }
     );
+
+    this.showPDF();
   }
 }

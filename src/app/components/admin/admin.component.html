@@ -40,7 +40,7 @@
                       class=""
                       name="imagen"
                       #imagen="ngModel"
-                      [(ngModel)]="producto.imagen"
+                      [(ngModel)]="producto.ruta_imagen"
                       id="imagen"
                     />
                   </div>
@@ -312,7 +312,7 @@
         <div class="modal-content">
           <div class="modal-body">
             <div id="create-product" class="container">
-              <form id="createForm">
+              <form id="createForm2">
                 <div class="form-group">
                   <label for="product_name">Nombre del producto</label>
                   <input
@@ -619,20 +619,23 @@
       </form>
     </div>
     <div class="category-filter">
+      <div class="loading" *ngIf="!categorias">
+        <i class='icon-spinner icon-spin icon-large'></i>
+      </div>
       <div *ngFor="let categoria of categorias">
         <a >
           <button (click)="filterTag(categoria.nombre)" type="button">
             {{ categoria.nombre }}
           </button>
         </a>
-        
+
       </div>
       <button (click)="filterTag('todo')" type="button">TODO</button>
       <a >
         <button
-          style="color: rgba(0, 0, 0, 0.98); 
+          style="color: rgba(0, 0, 0, 0.98);
                   background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;"
-          (click)="showPDF()" 
+          (click)="getPDFURL()"
           type="button"
         >
           Catalogo PDF

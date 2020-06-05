@@ -18,6 +18,8 @@ declare var $: any;
 })
 export class AdminComponent implements OnInit {
   public productos: Array<Producto>;
+  public page: number;
+  public perPage: number;
   public producto: Producto;
   public categorias: Array<Categoria>;
   public filterProducts: Array<Producto>;
@@ -36,6 +38,7 @@ export class AdminComponent implements OnInit {
     private _categoriaService: CategoriaService,
     // tslint:disable-next-line:variable-name
     private _userService: UserService,
+    // tslint:disable-next-line:variable-name
     private _pdfService: PdfService
   ) {
       this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null);
@@ -50,7 +53,7 @@ export class AdminComponent implements OnInit {
     this.token = this._userService.getToken();
     this.getCategorys();
     this.getProducts();
-    this.getPDFURL();
+
   }
 
   getProducts(){
@@ -351,6 +354,8 @@ export class AdminComponent implements OnInit {
         console.log( <any>error);
       }
     );
+
+    this.showPDF();
   }
 
 
