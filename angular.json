@@ -126,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pidetuchuche-Angular"
+    }
+  },
+  "defaultProject": "pidetuchuche-Angular",
+  "cli": {
+    "analytics": false
+  }
 }
