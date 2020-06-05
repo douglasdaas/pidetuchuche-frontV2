@@ -35,10 +35,10 @@ export class ProductoComponent implements OnInit {
     AOS.init();
     AOS.refresh();
 
-    if (this._userService.getToken()){
+    if (this._userService.getToken()) {
       this.token = this._userService.getToken();
     }
-    //console.log( this._productoService.pruebas());
+    // console.log( this._productoService.pruebas());
 
   }
 
@@ -145,6 +145,13 @@ export class ProductoComponent implements OnInit {
         }
       );
     }
+  }
+
+  transformImage(producto) {
+  const ruta = producto.ruta_imagen;
+  const quality = '/q_auto:eco';
+  const position = ruta.indexOf('/v');
+  return [ruta.slice(0, position), quality, ruta.slice(position)].join('');
   }
 
 }

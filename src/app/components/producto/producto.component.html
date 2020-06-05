@@ -3,7 +3,7 @@
 </div>
 
 <div class="container-fluid container-products" *ngIf="productos">
-  
+
   <div *ngFor="let producto of productos">
     <div data-aos-offset="200" data-aos="flip-up" class="wrapper cards">
       <div class="row">
@@ -35,9 +35,9 @@
                 >
                   editar
                 </button>
-                <button 
-                  class="buttonDelete" 
-                  type="button" 
+                <button
+                  class="buttonDelete"
+                  type="button"
                   (click)="deleteProduct(producto)"
                   name="button">
                   borrar
@@ -48,7 +48,7 @@
         </div>
         <div class="product-img col-md-4 mw-100 w-100">
           <img
-            src="{{ producto.ruta_imagen }}"
+            src="{{ transformImage(producto) }}"
             alt="Responsive image"
             class="img-fluid"
           />
