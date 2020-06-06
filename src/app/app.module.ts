@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { HomeModule } from './home/home.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -15,8 +16,9 @@ import { HomeModule } from './home/home.module';
     BrowserModule,
     HttpClientModule,
     NgbModule,
-    AdminModule,
     HomeModule,
+    AdminModule,
+    LoginModule,
     AppRoutingModule
   ],
   providers: [

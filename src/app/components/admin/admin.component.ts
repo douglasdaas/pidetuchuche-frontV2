@@ -42,9 +42,6 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this._userService.getToken()) {
-      this._router.navigate(['login']);
-    }
     AOS.init();
     AOS.refresh();
     this.token = this._userService.getToken();
