@@ -625,7 +625,7 @@
       <div *ngFor="let categoria of categorias">
         <a >
           <button (click)="filterTag(categoria.nombre)" type="button">
-            {{ categoria.nombre }}
+            {{ categoria.nombre  | uppercase}}
           </button>
         </a>
 

@@ -1,22 +1,25 @@
 import { NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
-import { AdminComponent } from './components/admin/admin.component';
-import { HomeComponent  } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { CanPassGuard } from './can-pass.guard';
 
 
 const routes: Routes = [
-  { path:'', component: HomeComponent },
-  { path:'home', component: HomeComponent },
-  { path:'login', component: LoginComponent },
-  { path:'admin', component: AdminComponent },
-  { path:'**', component: HomeComponent }
+  { path:'home',
+    loadChildren:'./home/home.module#HomeModule', 
+  },
+  { path:'admin',
+    canLoad:[CanPassGuard],
+    loadChildren:'./admin/admin.module#AdminModule'},
+  {
+    path:'login',
+    loadChildren:'./login/login.module#LoginModule'
+  },
+  { path:"", loadChildren:'./home/home.module#HomeModule'},
+  { path:'**', redirectTo: 'home' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

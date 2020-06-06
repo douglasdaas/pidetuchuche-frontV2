@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Producto } from '../../models/producto';
 import { UserService } from 'src/app/services/user/user.service';
 import { ProductoService } from '../../services/producto/producto.service';
-import { ActivatedRoute, Router, Event } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import * as AOS from 'aos';
-import { Categoria } from 'src/app/models/categoria';
-import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { PdfService } from 'src/app/services/pdf/pdf.service';
 import { pdf } from 'src/app/models/pdf';
+import { Categoria } from 'src/app/models/categoria';
 declare var $: any;
 
 @Component({
@@ -35,8 +34,6 @@ export class AdminComponent implements OnInit {
     // tslint:disable-next-line:variable-name
     private _productoService: ProductoService,
     // tslint:disable-next-line:variable-name
-    private _categoriaService: CategoriaService,
-    // tslint:disable-next-line:variable-name
     private _userService: UserService,
     // tslint:disable-next-line:variable-name
     private _pdfService: PdfService
@@ -45,14 +42,16 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this._userService.getToken()) {
-      this._router.navigate(['login']);
-    }
     AOS.init();
     AOS.refresh();
     this.token = this._userService.getToken();
-    this.getCategorys();
     this.getProducts();
+    this.categorias = [
+      new Categoria("combos",null,null),
+      new Categoria("chocolates",null,null),
+      new Categoria("dulces",null,null),
+      new Categoria("salados", null, null),
+      new Categoria("bebidas",null,null)];
 
   }
 
@@ -70,19 +69,6 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  getCategorys(){
-    this._categoriaService.getCategorias().subscribe(
-      response => {
-        if ( response.mensaje = 'Lista de todas las categorias.') {
-          this.categorias = response.datos;
-        }
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
 
   filterTag(nombreCategoria) {
     const filterByCategory = new Array<Producto>();
