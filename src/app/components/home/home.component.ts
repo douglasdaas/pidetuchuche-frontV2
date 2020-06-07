@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
-import { CategoriaService } from 'src/app/services/categoria/categoria.service'
-import { Categoria } from 'src/app/models/categoria';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto/producto.service';
 import * as AOS from 'aos';
 import { PdfService } from 'src/app/services/pdf/pdf.service';
 import { pdf } from 'src/app/models/pdf';
+import { Categoria } from 'src/app/models/categoria';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +20,6 @@ export class HomeComponent implements OnInit {
   public productos: Array<Producto>;
 
   constructor(
-    private _categoriaService: CategoriaService,
     private _productoService: ProductoService,
     private _pdfService: PdfService
   ) { }
@@ -29,8 +27,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     AOS.init();
     AOS.refresh();
-    this.getCategorys();
     this.getProducts();
+    this.categorias = [
+      new Categoria("combos",null,null),
+      new Categoria("chocolates",null,null),
+      new Categoria("dulces",null,null),
+      new Categoria("salados", null, null),
+      new Categoria("bebidas",null,null)];
   }
 
   filterTag(nombreCategoria){
@@ -78,20 +81,6 @@ export class HomeComponent implements OnInit {
       },
       error => {
         console.log(error);
-      }
-    );
-  }
-
-  getCategorys(){
-    this._categoriaService.getCategorias().subscribe(
-      response => {
-        if ( response.mensaje = 'Lista de todas las categorias.') {
-          this.categorias = response.datos;
-        }
-        console.log(response);
-      },
-      error => {
-        console.log(<any>error);
       }
     );
   }
