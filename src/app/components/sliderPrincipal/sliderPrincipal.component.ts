@@ -29,7 +29,7 @@ export class SliderPrincipalComponent implements OnInit {
 
     this.token = this._userService.getToken();
     this.getSliderPrincipal();
-    this.showSlider();
+    //this.showSlider();
 
   }
 
@@ -37,7 +37,7 @@ export class SliderPrincipalComponent implements OnInit {
     this._productoService.getSliderPrincipal().subscribe(
       response =>{
         console.log(response);
-        if (response.status === 200 ){
+        if (response.status = 'Lista de todos los productos Principales, hay 3 productos principales' ){
           this.productos = response.datos
           console.log(this.productos);
         }
