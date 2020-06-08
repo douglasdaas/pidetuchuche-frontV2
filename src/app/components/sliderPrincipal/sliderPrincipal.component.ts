@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { HttpClient } from '@angular/common/http';
 import { ProductoService } from 'src/app/services/producto/producto.service';
@@ -14,8 +14,9 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./sliderPrincipal.component.css']
 })
 export class SliderPrincipalComponent implements OnInit {
-  public productos: Array<Producto>;
+  @Input() productos: Array<Producto>;
   public token: any;
+
   constructor(
     private _http: HttpClient,
     private _productoService: ProductoService,

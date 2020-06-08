@@ -605,7 +605,18 @@
   </div>
   <section class="full-wh full-h-to-auto">
     <div class="welcome-header container-fluid">
-      <app-sliderPrincipal></app-sliderPrincipal>
+
+      <div *ngIf="!shouldFiltSlider">
+        <app-sliderPrincipal
+          [productos] ="sliderProducts"
+        ></app-sliderPrincipal>
+      </div>
+      <div *ngIf="shouldFiltSlider">
+        <app-sliderPrincipal
+          [productos] = "sliderProductsByCategory"
+        ></app-sliderPrincipal>
+      </div>
+      
     </div>
     <div class="search-form">
       <h1>Nuestro Catálogo</h1>

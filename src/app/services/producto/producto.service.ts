@@ -33,6 +33,11 @@ export class ProductoService {
     return this._http.get(this.url + '/productos-principal')
   }
 
+  // Obtener los productos del Slider Principal por categoria
+  getSliderPrincipalByCategory(categoria): Observable<any> {
+    return this._http.get(this.url + '/categorias-principal/'+categoria);
+  }
+
   // Obtener productos de una categoria
   getProductosByCategory(id): Observable<any> {
     return this._http.get(this.url + '/productos' + id );

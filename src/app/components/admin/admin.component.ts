@@ -22,6 +22,9 @@ export class AdminComponent implements OnInit {
   public producto: Producto;
   public categorias: Array<Categoria>;
   public filterProducts: Array<Producto>;
+  public sliderProducts: Array<Producto>;
+  public sliderProductsByCategory: Array<Producto>;
+  public shouldFiltSlider: boolean;
   public token;
   public pdf: pdf;
   public idProducto: number;
@@ -46,12 +49,14 @@ export class AdminComponent implements OnInit {
     AOS.refresh();
     this.token = this._userService.getToken();
     this.getProducts();
+    this.getSliderPrincipal();
     this.categorias = [
       new Categoria("combos",null,null),
       new Categoria("chocolates",null,null),
       new Categoria("dulces",null,null),
       new Categoria("salados", null, null),
       new Categoria("bebidas",null,null)];
+      this.shouldFiltSlider = false;
 
   }
 
@@ -75,6 +80,7 @@ export class AdminComponent implements OnInit {
     if (nombreCategoria === 'todo') {
       this.filterProducts = this.productos;
     } else {
+      this.shouldFiltSlider = true;
       this.productos.forEach(producto => {
         if ( producto.categorias.length > 0   ) {
           let agregar = false;
@@ -91,6 +97,7 @@ export class AdminComponent implements OnInit {
         }
       });
       this.filterProducts = filterByCategory;
+      this.getSliderByCategory(nombreCategoria);
     }
   }
 
@@ -344,5 +351,40 @@ export class AdminComponent implements OnInit {
     this.showPDF();
   }
 
+  getSliderPrincipal(){
+    this._productoService.getSliderPrincipal().subscribe(
+      response =>{
+        console.log(response);
+        if (response.status = 'Lista de todos los productos Principales, hay 3 productos principales' ){
+          this.sliderProducts = response.datos
+          console.log(this.sliderProducts);
+        }
+      },
+      error =>{
+        console.log(<any>error);
+      }
+    );
+  }
 
+  getSliderByCategory(categoria){
+
+    if (categoria === 'todo'){
+      this.shouldFiltSlider = false;
+    }else{
+      this._productoService.getSliderPrincipalByCategory(categoria).subscribe(
+        response =>{
+          console.log(response);
+          // Validacion
+          if (response.status = 'Lista de todos los productos Principales, hay 3 productos principales' ){
+            this.sliderProductsByCategory = response.datos
+            console.log(this.sliderProductsByCategory);
+          }
+        },
+        error =>{
+          console.log(<any>error);
+        }
+      );
+    }
+    
+  }
 }
