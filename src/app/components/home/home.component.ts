@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit {
   public filterProducts: Array<Producto>;
   public categorias: Array<Categoria>;
   public productos: Array<Producto>;
+  public sliderProducts: Array<Producto>;
+  public sliderProductsByCategory: Array<Producto>;
+  public shouldFiltSlider: boolean;
 
   constructor(
     private _productoService: ProductoService,
@@ -34,6 +37,7 @@ export class HomeComponent implements OnInit {
       new Categoria("dulces",null,null),
       new Categoria("salados", null, null),
       new Categoria("bebidas",null,null)];
+      this.shouldFiltSlider = false;
   }
 
   filterTag(nombreCategoria){
@@ -74,7 +78,7 @@ export class HomeComponent implements OnInit {
   getProducts(){
     this._productoService.getProductos().subscribe(
       response => {
-        if ( response.mensaje = 'Lista de todos los productos') {
+        if ( response.status = true) {
           this.productos = response.datos;
         }
         console.log(response);
@@ -92,7 +96,7 @@ export class HomeComponent implements OnInit {
   getPDFURL(){
     this._pdfService.getPDFURL().subscribe(
       response =>{
-        if(response.mensaje = 'Micelaneo encontrado correctamente.'){
+        if(response.status = true){
           this.pdf = response.datos;
         }
         console.log(response);
@@ -103,5 +107,42 @@ export class HomeComponent implements OnInit {
     );
 
     this.showPDF();
+  }
+
+  getSliderPrincipal(){
+    this._productoService.getSliderPrincipal().subscribe(
+      response =>{
+        console.log(response);
+        if (response.status = true ){
+          this.sliderProducts = response.datos
+          console.log(this.sliderProducts);
+        }
+      },
+      error =>{
+        console.log(<any>error);
+      }
+    );
+  }
+
+  getSliderByCategory(categoria){
+
+    if (categoria === 'todo'){
+      this.shouldFiltSlider = false;
+    }else{
+      this._productoService.getSliderPrincipalByCategory(categoria).subscribe(
+        response =>{
+          console.log(response);
+          // Validacion
+          if (response.status = true ){
+            this.sliderProductsByCategory = response.datos
+            console.log(this.sliderProductsByCategory);
+          }
+        },
+        error =>{
+          console.log(<any>error);
+        }
+      );
+    }
+    
   }
 }

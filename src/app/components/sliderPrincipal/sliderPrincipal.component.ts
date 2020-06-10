@@ -29,7 +29,7 @@ export class SliderPrincipalComponent implements OnInit {
   ngOnInit() {
 
     this.token = this._userService.getToken();
-    this.getSliderPrincipal();
+    //this.getSliderPrincipal();
     //this.showSlider();
 
   }

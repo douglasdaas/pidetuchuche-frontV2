@@ -17,8 +17,6 @@ declare var $: any;
 })
 export class AdminComponent implements OnInit {
   public productos: Array<Producto>;
-  public page: number;
-  public perPage: number;
   public producto: Producto;
   public categorias: Array<Categoria>;
   public filterProducts: Array<Producto>;
@@ -63,7 +61,7 @@ export class AdminComponent implements OnInit {
   getProducts(){
     this._productoService.getProductos().subscribe(
       response => {
-        if ( response.mensaje = 'Lista de todos los productos') {
+        if ( response.status = true) {
           this.productos = response.datos;
         }
         console.log(response);
@@ -338,7 +336,7 @@ export class AdminComponent implements OnInit {
   getPDFURL(){
     this._pdfService.getPDFURL().subscribe(
       response =>{
-        if(response.mensaje = 'Micelaneo encontrado correctamente.'){
+        if(response.status = true){
           this.pdf = response.datos;
         }
         console.log(response);
@@ -355,7 +353,7 @@ export class AdminComponent implements OnInit {
     this._productoService.getSliderPrincipal().subscribe(
       response =>{
         console.log(response);
-        if (response.status = 'Lista de todos los productos Principales, hay 3 productos principales' ){
+        if (response.status = true ){
           this.sliderProducts = response.datos
           console.log(this.sliderProducts);
         }
@@ -375,7 +373,7 @@ export class AdminComponent implements OnInit {
         response =>{
           console.log(response);
           // Validacion
-          if (response.status = 'Lista de todos los productos Principales, hay 3 productos principales' ){
+          if (response.status = true ){
             this.sliderProductsByCategory = response.datos
             console.log(this.sliderProductsByCategory);
           }
