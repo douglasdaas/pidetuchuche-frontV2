@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
     AOS.init();
     AOS.refresh();
     this.getProducts();
+    this.getSliderPrincipal();
     this.categorias = [
       new Categoria("combos",null,null),
       new Categoria("chocolates",null,null),
