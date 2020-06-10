@@ -374,7 +374,10 @@ export class AdminComponent implements OnInit {
           console.log(response);
           // Validacion
           if (response.status = true ){
-            this.sliderProductsByCategory = response.datos
+            this.sliderProductsByCategory = response.datos;
+            if (this.sliderProductsByCategory.length === 0){
+              this.shouldFiltSlider = false;
+            }
             console.log(this.sliderProductsByCategory);
           }
         },

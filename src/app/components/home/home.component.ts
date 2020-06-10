@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
     if (nombreCategoria == 'todo'){
       this.filterProducts = this.productos;
     }else{
+      this.shouldFiltSlider = true;
       this.productos.forEach(producto =>{
         if( producto.categorias.length > 0   ){
           let agregar = false;
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit {
         }
       });
       this.filterProducts = filterByCategory;
+      this.getSliderByCategory(nombreCategoria);
     }
   }
 
@@ -135,7 +137,10 @@ export class HomeComponent implements OnInit {
           console.log(response);
           // Validacion
           if (response.status = true ){
-            this.sliderProductsByCategory = response.datos
+            this.sliderProductsByCategory = response.datos;
+            if (this.sliderProductsByCategory.length === 0){
+              this.shouldFiltSlider = false;
+            }
             console.log(this.sliderProductsByCategory);
           }
         },
