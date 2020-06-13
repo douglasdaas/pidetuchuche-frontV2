@@ -5,12 +5,14 @@ import { ActivatedRoute, Router, Event } from '@angular/router';
 import * as AOS from 'aos';
 import { Categoria } from 'src/app/models/categoria';
 import { UserService } from 'src/app/services/user/user.service';
+import { ViewEncapsulation } from '@angular/core';
 
 
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: [ ProductoService, UserService ]
 })
 export class ProductoComponent implements OnInit {
