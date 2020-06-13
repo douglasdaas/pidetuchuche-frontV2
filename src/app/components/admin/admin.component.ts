@@ -8,11 +8,13 @@ import { PdfService } from 'src/app/services/pdf/pdf.service';
 import { pdf } from 'src/app/models/pdf';
 import { Categoria } from 'src/app/models/categoria';
 declare var $: any;
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
+  encapsulation: ViewEncapsulation.None,
   providers: [ UserService, ProductoService, PdfService ]
 })
 export class AdminComponent implements OnInit {

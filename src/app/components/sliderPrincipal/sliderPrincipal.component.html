@@ -15,50 +15,22 @@
             <h4> Stock:  {{producto.cantidad}} </h4>
             <p> {{producto.description}} </p>
             <div>
-              <button
-                data-toggle="modal"
-                data-target="#buyInfo"
-                type="button"
-                name="button"
-              >
-                Compra</button
-              >
-              <button *ngIf="token"
-                class="buttonUpdate"
-                data-toggle="modal"
-                data-target="#editProduct"
-                type="button"
-                name="button"
-              >
-                editar
-              </button>
+              <button data-toggle="modal" data-target="#buyInfo" type="button" name="button">
+                Compra</button>
+              <button *ngIf="token" class="buttonUpdate" style="display: none;" data-toggle="modal" data-target="#editProduct" type="button" name="button">
+                editar</button>
             </div>
           </div>
-          <img
-            class="img-fluid img-principal"
-            src={{producto.ruta_imagen}}
-                   
-            alt=""
-          />
+          <img class="img-principal img-fluid " src={{producto.ruta_imagen}} alt=""/>
         </div>
       </div>
     </div>
-    
   </div>
-
-  <a
-    class="carousel-control-prev"
-    href=""
-    role="button"
-    data-slide="prev"
-  >
-    <span 
-      class="carousel-control-prev-icon" 
-      aria-hidden="true">
-    </span>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>

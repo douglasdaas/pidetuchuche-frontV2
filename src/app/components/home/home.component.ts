@@ -6,10 +6,12 @@ import * as AOS from 'aos';
 import { PdfService } from 'src/app/services/pdf/pdf.service';
 import { pdf } from 'src/app/models/pdf';
 import { Categoria } from 'src/app/models/categoria';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./home.component.css'],
   providers: [  UserService, ProductoService, PdfService ]
 })

@@ -1,63 +1,46 @@
 <div class="loading" *ngIf="!productos">
-  <i class='icon-spinner icon-spin icon-large'></i>
-</div>
+    <i class='icon-spinner icon-spin icon-large'></i>
+  </div>
 
-<div class="container-fluid container-products" *ngIf="productos">
+  <div class="container-fluid container-products" *ngIf="productos">
 
-  <div *ngFor="let producto of productos">
-    <div data-aos-offset="200" data-aos="flip-up" class="wrapper cards">
-      <div class="row">
-        <div class="product-info col-md-8">
-          <div class="product-text">
-            <h1>{{ producto.nombre }}</h1>
-            <h2>{{ producto.categorias.nombre }}</h2>
-            <h3>Precio: {{ producto.precio_total }} $</h3>
-            <h4>Stock: {{ producto.cantidad }}</h4>
-            <p>{{ producto.descripcion }}</p>
+    <div *ngFor="let producto of productos">
+      <div data-aos-offset="200" data-aos="flip-up" class="wrapper cards">
+        <div class="row">
+          <div class="product-info col-md-8">
+            <div class="product-text">
+              <h1>{{ producto.nombre }}</h1>
+              <h2>{{ producto.categorias.nombre }}</h2>
+              <h3>Precio: {{ producto.precio_total }} $</h3>
+              <h4>Stock: {{ producto.cantidad }}</h4>
+              <p>{{ producto.descripcion }}</p>
 
-            <div class="product-data">
-              <button
-                data-toggle="modal"
-                data-target="#buyInfo"
-                type="button"
-                name="button"
-              >
-                Compra
-              </button>
-              <div *ngIf="token">
-                <button
-                  class="buttonUpdate"
-                  data-toggle="modal"
-                  data-target="#editProduct"
-                  type="button"
-                  name="button"
-                  (click)="fillUpdate(producto)"
-                >
-                  editar
+              <div class="product-data">
+                <button data-toggle="modal" data-target="#buyInfo" type="button" name="button">
+                  Compra
                 </button>
-                <button
-                  class="buttonDelete"
-                  type="button"
-                  (click)="deleteProduct(producto)"
-                  name="button">
-                  borrar
-                </button>
+                <div *ngIf="token">
+                  <button class="buttonUpdate" data-toggle="modal" data-target="#editProduct" type="button" name="button" (click)="fillUpdate(producto)">
+                    editar
+                  </button>
+                  <button class="buttonDelete" type="button" (click)="deleteProduct(producto)" name="button">
+                    borrar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="product-img col-md-4 mw-100 w-100">
-          <img
-            src="{{ transformImage(producto) }}"
-            alt="Responsive image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="discount" *ngIf="producto.descuento">
-          <h1>{{ producto.descuento }}</h1>
-          <h2>de descuento</h2>
+
+          <div class="product-img col-md-4 mw-100 w-100">
+            <img src="{{ transformImage(producto) }}" alt="Responsive image" class="img-fluid"/>
+          </div>
+
+          <div class="discount" *ngIf="producto.descuento">
+            <h1>{{ producto.descuento }}</h1>
+            <h2>de descuento</h2>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-</div>

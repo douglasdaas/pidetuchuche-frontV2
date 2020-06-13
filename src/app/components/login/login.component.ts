@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from 'src/app/services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [ UserService ]  
+  encapsulation: ViewEncapsulation.None,
+  providers: [ UserService ]
 })
 export class LoginComponent implements OnInit {
   public user: User;
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService
-  ) { 
+  ) {
     this.user = new User('','',null,null);
   }
 

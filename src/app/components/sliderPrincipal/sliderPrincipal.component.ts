@@ -5,13 +5,15 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ViewEncapsulation } from '@angular/core';
 
 
 
 @Component({
   selector: 'app-sliderPrincipal',
   templateUrl: './sliderPrincipal.component.html',
-  styleUrls: ['./sliderPrincipal.component.css']
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./sliderPrincipal.component.css'],
 })
 export class SliderPrincipalComponent implements OnInit {
   @Input() productos: Array<Producto>;
@@ -55,9 +57,9 @@ export class SliderPrincipalComponent implements OnInit {
     if (this.productos){
 
       this.productos.forEach( producto =>{
-        let div = document.createElement("div"); 
+        let div = document.createElement("div");
         div.classList.add("carousel-item");
-        
+
         if (producto.categorias.length > 0) {
           if (producto.descuento === null) {
             div.innerHTML ='<div class="principal-product"><div class="principal-card card-1"><div class="principal-text"><h1>' +producto.nombre +"</h1><h2>Precio</h2><h3>" +producto.precio_total +"$</h3><h4>Stock:" +producto.cantidad +"</h4><p>" +producto.description +'</p><div><button data-toggle="modal" data-target="#buyInfo" type="button" name="button">Compra</button><button class="buttonUpdate" style="display:none"  data-toggle="modal" data-target="#editProduct" type="button" name="button">editar</button></div></div><img class="img-fluid img-principal" src="' +producto.ruta_imagen +'" alt=""></div></div>';
