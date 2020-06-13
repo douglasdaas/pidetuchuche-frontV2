@@ -61,6 +61,7 @@ export class ProductoComponent implements OnInit {
     prioridad.value = String(producto.prioridad);
     precio.value = String(producto.precio);
     descuento.value = String(producto.descuento);
+    
 
     for (let k = 0; k <= 4; k++) {
       const categorias = document.getElementById(`categoriaV${[k]}`) as HTMLInputElement;

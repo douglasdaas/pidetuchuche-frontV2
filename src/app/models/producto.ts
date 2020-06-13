@@ -13,7 +13,9 @@ export class Producto{
         public precio_total:number,
         public created_at:any,
         public updated_at:any,
-        public categorias: Array<Categoria>
+        public categorias: Array<Categoria>,
+        public principal: boolean,
+        public promo_gratis: boolean
         // Falta atributo pivot
     )
     {}
