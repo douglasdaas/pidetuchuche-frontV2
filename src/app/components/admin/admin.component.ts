@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     // tslint:disable-next-line:variable-name
     private _pdfService: PdfService
   ) {
-      this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null);
+      this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null, false, false);
   }
 
   ngOnInit() {
@@ -141,6 +141,8 @@ export class AdminComponent implements OnInit {
       this.producto.descuento = 0;
     }
     productData.append('nombre', this.producto.nombre);
+    productData.append('promo_gratis', String( this.producto.promo_gratis));
+    productData.append('principal', String(this.producto.principal));
     productData.append('descripcion', this.producto.description);
     productData.append('cantidad', String(this.producto.cantidad));
     productData.append('prioridad', String(this.producto.prioridad));
@@ -227,6 +229,8 @@ export class AdminComponent implements OnInit {
     const prioridad = document.getElementById('inputV4') as HTMLInputElement;
     const precio = document.getElementById('inputV5') as HTMLInputElement;
     const descuento = document.getElementById('inputV6') as HTMLInputElement;
+    const principal = document.getElementById('principal') as HTMLInputElement;
+    const promo_gratis = document.getElementById('promo_gratis') as HTMLInputElement;
 
     // tslint:disable-next-line:variable-name
     const product_category = [];
@@ -262,6 +266,8 @@ export class AdminComponent implements OnInit {
     productData.append('prioridad', String(prioridad.value));
     productData.append('precio', String(precio.value));
     productData.append('descuento', String(descuento.value));
+    productData.append('principal', String(principal.value));
+    productData.append('promo_gratis', String(promo_gratis.value));
 
     this._productoService.editProduct(this.token, this.idProducto, productData).subscribe(
       response => {
@@ -311,6 +317,8 @@ export class AdminComponent implements OnInit {
     this.producto.prioridad = 1;
     this.producto.cantidad = 0;
     this.producto.descuento = 0;
+    this.producto.principal = false;
+    this.producto.promo_gratis = false;
 
   }
 
