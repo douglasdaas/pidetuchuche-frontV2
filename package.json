@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lite": "lite-server"
+    "lite": "lite-server",
+    "optimizecss": "gulp --gulpfile optimize-css.gulpfile.js"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +28,13 @@
     "aos": "^3.0.0-beta.6",
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-brotli": "^3.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-filter": "^6.0.0",
+    "gulp-gzip": "^1.4.2",
+    "gulp-purify-css": "^0.1.0",
+    "gulp-rename": "^2.0.0",
     "jquery": "^3.5.1",
     "path": "^0.12.7",
     "rxjs": "~6.4.0",
