@@ -49,15 +49,8 @@
         ></app-sliderPrincipal>
       </div>
     </div>
-    <div class="search-form category-filter">
+    <div class="search-form">
       <h1>Nuestro Catálogo</h1>
-      <div>
-        <a href="#">
-          <button style="color: rgba(0, 0, 0, 0.98); background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;" (click)="getPDFURL()" type='button'>
-            Catalogo PDF
-          </button>
-        </a>
-      </div>
       <form class="form-inline my-2 my-lg-0">
         <input (keyup)="filterProduct($event)" class="form-control" type="text" placeholder="Busca tu chuche"/>
       </form>
@@ -71,6 +64,11 @@
       <a href="#container-products"><button (click)="filterTag('todo')" type="button">
         TODO
       </button></a>
+      <a href="#">
+        <button style="color: rgba(0, 0, 0, 0.98); background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;" (click)="getPDFURL()" type='button'>
+          Catalogo PDF
+        </button>
+      </a>
     </div>
     <div class="second-section">
       <div *ngIf="filterProducts == undefined">

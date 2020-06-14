@@ -349,7 +349,7 @@ span {
 .category-filter {
   display: flex;
   width: 100vw;
-  padding: 30px 60px 30px 60px;
+  padding: 30px 12px 30px 12px;
   justify-content: space-between;
 }
 
@@ -376,6 +376,7 @@ span {
   background: linear-gradient(0deg, rgba(70,70,70,1) 0%, rgba(0,0,0,1) 100%);
   cursor: pointer;
   outline: none;
+  margin-left: 3px;
 
 }
 a {
@@ -502,7 +503,7 @@ a {
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: #ffffff;
-    background: linear-gradient(0deg, rgb(50, 255, 95) 0%, rgb(87, 251, 99) 100%);
+    background: #b300b3;
     cursor: pointer;
     outline: none;
     margin-bottom: 0px;
@@ -697,7 +698,7 @@ a {
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: #ffffff;
-    background: linear-gradient(0deg, rgb(50, 255, 95) 0%, rgb(87, 251, 99) 100%);
+    background: #b300b3;
     cursor: pointer;
     outline: none;
     margin-bottom: 0px;
