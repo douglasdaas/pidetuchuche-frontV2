@@ -136,8 +136,8 @@
                 </div>
               <div class="form-group">
                   <label for="principal"> Producto principal </label>
-                  <select 
-                    name="principal" 
+                  <select
+                    name="principal"
                     id="principal1"
                     [(ngModel)]="producto.principal"
                     >
@@ -149,8 +149,8 @@
               </div>
               <div class="form-group">
                 <label for="promo_gratis"> Promocion gratis </label>
-                <select 
-                  name="promo_gratis" 
+                <select
+                  name="promo_gratis"
                   id="promo_gratis1"
                   [(ngModel)]="producto.promo_gratis"
                   >
@@ -429,8 +429,8 @@
                 </div>
                 <div class="form-group">
                   <label for="principal"> Producto principal </label>
-                  <select 
-                    name="principal" 
+                  <select
+                    name="principal"
                     id="principal"
                     [(ngModel)]="producto.principal"
                     >
@@ -442,8 +442,8 @@
               </div>
               <div class="form-group">
                 <label for="promo_gratis"> Promocion gratis </label>
-                <select 
-                  name="promo_gratis" 
+                <select
+                  name="promo_gratis"
                   id="promo_gratis"
                   [(ngModel)]="producto.promo_gratis"
                   >
@@ -668,10 +668,17 @@
           [productos] = "sliderProductsByCategory"
         ></app-sliderPrincipal>
       </div>
-      
+
     </div>
-    <div class="search-form">
+    <div class="search-form category-filter">
       <h1>Nuestro Catálogo</h1>
+      <div>
+        <a href="#">
+          <button style="color: rgba(0, 0, 0, 0.98); background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;" (click)="getPDFURL()" type='button'>
+            Catalogo PDF
+          </button>
+        </a>
+      </div>
       <form class="form-inline my-2 my-lg-0">
         <input
           (keyup)="filterProduct($event)"
@@ -694,16 +701,6 @@
 
       </div>
       <button (click)="filterTag('todo')" type="button">TODO</button>
-      <a >
-        <button
-          style="color: rgba(0, 0, 0, 0.98);
-                  background: linear-gradient(0deg, rgb(185,185,185) 0%, rgb(255, 255, 255) 100%); !important;"
-          (click)="getPDFURL()"
-          type="button"
-        >
-          Catalogo PDF
-        </button>
-      </a>
     </div>
     <div class="second-section">
       <div *ngIf="filterProducts == undefined">

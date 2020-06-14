@@ -51,16 +51,16 @@ export class AdminComponent implements OnInit {
     this.getProducts();
     this.getSliderPrincipal();
     this.categorias = [
-      new Categoria("combos",null,null),
-      new Categoria("chocolates",null,null),
-      new Categoria("dulces",null,null),
-      new Categoria("salados", null, null),
-      new Categoria("bebidas",null,null)];
-      this.shouldFiltSlider = false;
+      new Categoria('combos', null, null),
+      new Categoria('chocolates', null, null),
+      new Categoria('dulces', null, null),
+      new Categoria('salados', null, null),
+      new Categoria('bebidas', null, null)];
+    this.shouldFiltSlider = false;
 
   }
 
-  getProducts(){
+  getProducts() {
     this._productoService.getProductos().subscribe(
       response => {
         if ( response.status = true) {
@@ -288,20 +288,20 @@ export class AdminComponent implements OnInit {
     this.idProducto = id;
   }
 
-  sellProduct(producto){
+  sellProduct(producto) {
     const sellQuantity = document.getElementById(producto.id) as HTMLInputElement;
     const productData = new FormData();
 
-    productData.append("cantidad", sellQuantity.value);
+    productData.append('cantidad', sellQuantity.value);
 
-    this._productoService.sellProduct(this.token,producto.id,productData).subscribe(
-      response =>{
+    this._productoService.sellProduct(this.token, producto.id, productData).subscribe(
+      response => {
         console.log(response);
-        alert(sellQuantity.value +' Producto vendido');
+        alert(sellQuantity.value + ' Producto vendido');
         this.getProducts();
       },
-      error =>{
-        console.log(<any>error);
+      error => {
+        console.log(error as any);
       }
     );
 
@@ -322,7 +322,7 @@ export class AdminComponent implements OnInit {
 
   }
 
-  editPDF(){
+  editPDF() {
     const pdfData = new FormData();
 
     if ( $('#pdfFile').prop('files')[0] !== undefined ) {
@@ -330,72 +330,75 @@ export class AdminComponent implements OnInit {
     }
 
     this._pdfService.editPDF(this.token, pdfData).subscribe(
-      response =>{
+      response => {
         alert('PDF Actualizado');
       },
-      error =>{
-        console.log(<any> error);
+      error => {
+        console.log(error as any);
       }
     );
   }
 
-  showPDF(){
+  showPDF() {
     window.location.replace(this.pdf.ruta);
   }
 
-  getPDFURL(){
+  getPDFURL() {
     this._pdfService.getPDFURL().subscribe(
-      response =>{
-        if(response.status = true){
+      response => {
+        if (response.status = true) {
           this.pdf = response.datos;
         }
         console.log(response);
       },
-      error =>{
-        console.log( <any>error);
+      error => {
+        console.log( error as any);
       }
     );
 
     this.showPDF();
   }
 
-  getSliderPrincipal(){
+  getSliderPrincipal() {
     this._productoService.getSliderPrincipal().subscribe(
-      response =>{
+      response => {
         console.log(response);
-        if (response.status = true ){
-          this.sliderProducts = response.datos
+        if (response.status = true ) {
+          this.sliderProducts = response.datos;
+          if (this.sliderProductsByCategory.length === 0) {
+            this.shouldFiltSlider = false;
+          }
           console.log(this.sliderProducts);
         }
       },
-      error =>{
-        console.log(<any>error);
+      error => {
+        console.log(error as any);
       }
     );
   }
 
-  getSliderByCategory(categoria){
+  getSliderByCategory(categoria) {
 
-    if (categoria === 'todo'){
+    if (categoria === 'todo') {
       this.shouldFiltSlider = false;
-    }else{
+    } else {
       this._productoService.getSliderPrincipalByCategory(categoria).subscribe(
-        response =>{
+        response => {
           console.log(response);
           // Validacion
-          if (response.status = true ){
+          if (response.status = true ) {
             this.sliderProductsByCategory = response.datos;
-            if (this.sliderProductsByCategory.length === 0){
+            if (this.sliderProductsByCategory.length === 0) {
               this.shouldFiltSlider = false;
             }
             console.log(this.sliderProductsByCategory);
           }
         },
-        error =>{
-          console.log(<any>error);
+        error => {
+          console.log(error as any);
         }
       );
     }
-    
+
   }
 }
