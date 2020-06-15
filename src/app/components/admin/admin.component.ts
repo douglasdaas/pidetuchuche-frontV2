@@ -141,9 +141,11 @@ export class AdminComponent implements OnInit {
       this.producto.descuento = 0;
     }
     let crear = true;
-    if (product_category.length > 1 ){
-      alert('Producto tiene mas de una categoria, no puede ser principal de categoria');
-      crear = false;
+    if (this.producto.principal_categoria = true){
+      if (product_category.length > 1 && product_category.length < 0){
+        alert('El Producto para ser principal debe tener una y solo una categoria');
+        crear = false;
+      }
     }
     productData.append('nombre', this.producto.nombre);
     productData.append('promo_gratis', String( this.producto.promo_gratis));
@@ -180,10 +182,10 @@ export class AdminComponent implements OnInit {
           console.log(error as any);
         }
       );
-  
+
       this.getProducts();
     }
-    
+
   }
 
   test(event) {
@@ -197,6 +199,9 @@ export class AdminComponent implements OnInit {
     const prioridad = document.getElementById('inputV4') as HTMLInputElement;
     const precio = document.getElementById('inputV5') as HTMLInputElement;
     const descuento = document.getElementById('inputV6') as HTMLInputElement;
+    const principal = document.getElementById('principal') as HTMLInputElement;
+    const principal_categoria = document.getElementById('principal_categoria') as HTMLInputElement;
+    const promo_gratis  =  document.getElementById('promo_gratis') as HTMLInputElement;
 
     nombre.value = producto.nombre;
     descripcion.value = producto.description;
@@ -204,6 +209,9 @@ export class AdminComponent implements OnInit {
     prioridad.value = producto.prioridad;
     precio.value = producto.precio;
     descuento.value = producto.descuento;
+    principal.value = producto.principal;
+    principal_categoria.value = producto.principal_categoria;
+    promo_gratis.value = producto.promo_gratis;
 
     for (let k = 0; k <= 4; k++) {
       const categorias = document.getElementById(`categoriaV${k}`) as HTMLInputElement;
@@ -251,9 +259,11 @@ export class AdminComponent implements OnInit {
       }
     }
     let editar = true;
-    if (product_category.length > 1 ){
-      alert('Producto tiene mas de una categoria, no puede ser principal de categoria');
-      editar = false;
+    if (this.producto.principal_categoria = true){
+      if (product_category.length > 1 && product_category.length < 0){
+        alert('El Producto para ser principal debe tener una y solo una categoria');
+        editar = false;
+      }
     }
 
     // Se agrega la imagen si existe en el request
@@ -296,10 +306,10 @@ export class AdminComponent implements OnInit {
           console.log(error as any);
         }
       );
-  
+
       this.getProducts();
     }
-    
+
   }
 
   shouldEdit(id) {
