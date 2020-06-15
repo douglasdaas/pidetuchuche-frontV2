@@ -14,6 +14,7 @@ export class Producto{
         public created_at:any,
         public updated_at:any,
         public categorias: Array<Categoria>,
+        public principal_categoria: boolean,
         public principal: boolean,
         public promo_gratis: boolean
         // Falta atributo pivot
