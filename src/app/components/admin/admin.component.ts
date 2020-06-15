@@ -376,7 +376,6 @@ export class AdminComponent implements OnInit {
       }
     );
   }
-
   getSliderByCategory(categoria) {
 
     if (categoria === 'todo') {
