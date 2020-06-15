@@ -44,8 +44,6 @@ export class ProductoComponent implements OnInit {
 
   }
 
-
-
   fillUpdate(producto) {
     console.log(producto);
     const nombre = document.getElementById('inputV1') as HTMLInputElement;

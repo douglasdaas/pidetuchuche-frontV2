@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     // tslint:disable-next-line:variable-name
     private _pdfService: PdfService
   ) {
-      this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null, false, false);
+      this.producto = new Producto(1, '', undefined, '', 0, 1, 0, 0, 0, null, null, null, false, false, false);
   }
 
   ngOnInit() {
@@ -140,9 +140,15 @@ export class AdminComponent implements OnInit {
     } else if (this.producto.descuento < 0) {
       this.producto.descuento = 0;
     }
+    let crear = true;
+    if (product_category.length > 1 ){
+      alert('Producto tiene mas de una categoria, no puede ser principal de categoria');
+      crear = false;
+    }
     productData.append('nombre', this.producto.nombre);
     productData.append('promo_gratis', String( this.producto.promo_gratis));
     productData.append('principal', String(this.producto.principal));
+    productData.append('principal_categoria', String(this.producto.principal_categoria));
     productData.append('descripcion', this.producto.description);
     productData.append('cantidad', String(this.producto.cantidad));
     productData.append('prioridad', String(this.producto.prioridad));
@@ -159,23 +165,25 @@ export class AdminComponent implements OnInit {
     });
     const productoJSON = JSON.stringify(producto);
     console.log(productoJSON);
-
-    this._productoService.createProduct(this.token, productData).subscribe(
-      response => {
-        console.log(response);
-        alert('Producto creado');
-        console.log(this.producto);
-        this.clearProduct();
-        console.log(this.producto);
-        AOS.refresh();
-      },
-      error => {
-        alert('Error');
-        console.log(error as any);
-      }
-    );
-
-    this.getProducts();
+    if (crear){
+      this._productoService.createProduct(this.token, productData).subscribe(
+        response => {
+          console.log(response);
+          alert('Producto creado');
+          console.log(this.producto);
+          this.clearProduct();
+          console.log(this.producto);
+          AOS.refresh();
+        },
+        error => {
+          alert('Error');
+          console.log(error as any);
+        }
+      );
+  
+      this.getProducts();
+    }
+    
   }
 
   test(event) {
@@ -231,6 +239,7 @@ export class AdminComponent implements OnInit {
     const descuento = document.getElementById('inputV6') as HTMLInputElement;
     const principal = document.getElementById('principal') as HTMLInputElement;
     const promo_gratis = document.getElementById('promo_gratis') as HTMLInputElement;
+    const principal_categoria = document.getElementById('principal_categoria') as HTMLInputElement;
 
     // tslint:disable-next-line:variable-name
     const product_category = [];
@@ -240,6 +249,11 @@ export class AdminComponent implements OnInit {
       if (categoria.checked === true) {
         product_category.push(categoria.value);
       }
+    }
+    let editar = true;
+    if (product_category.length > 1 ){
+      alert('Producto tiene mas de una categoria, no puede ser principal de categoria');
+      editar = false;
     }
 
     // Se agrega la imagen si existe en el request
@@ -268,20 +282,24 @@ export class AdminComponent implements OnInit {
     productData.append('descuento', String(descuento.value));
     productData.append('principal', String(principal.value));
     productData.append('promo_gratis', String(promo_gratis.value));
+    productData.append('principal_categoria', String(principal_categoria.value));
 
-    this._productoService.editProduct(this.token, this.idProducto, productData).subscribe(
-      response => {
-        console.log(response);
-        alert('Producto modificado');
-        AOS.refresh();
-      },
-      error => {
-        alert('Error');
-        console.log(error as any);
-      }
-    );
-
-    this.getProducts();
+    if (editar){
+      this._productoService.editProduct(this.token, this.idProducto, productData).subscribe(
+        response => {
+          console.log(response);
+          alert('Producto modificado');
+          AOS.refresh();
+        },
+        error => {
+          alert('Error');
+          console.log(error as any);
+        }
+      );
+  
+      this.getProducts();
+    }
+    
   }
 
   shouldEdit(id) {
@@ -319,6 +337,7 @@ export class AdminComponent implements OnInit {
     this.producto.descuento = 0;
     this.producto.principal = false;
     this.producto.promo_gratis = false;
+    this.producto.principal_categoria = false;
 
   }
 
