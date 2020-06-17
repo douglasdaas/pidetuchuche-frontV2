@@ -196,7 +196,9 @@ export class AdminComponent implements OnInit {
           console.log(error as any);
         }
       );
-
+      principal_categoria.checked = false;
+      producto_principal.checked = false;
+      promo_gratis.checked = false;
       this.getProducts();
     }
 

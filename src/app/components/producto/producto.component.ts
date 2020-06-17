@@ -64,6 +64,10 @@ export class ProductoComponent implements OnInit {
     precio.value = String(producto.precio);
     descuento.value = String(producto.descuento);
 
+    principal_categoria.checked = false;
+    producto_principal.checked = false;
+    promo_gratis.checked = false;
+
     if(producto.principal_categoria){
       principal_categoria.checked = true;
     }
