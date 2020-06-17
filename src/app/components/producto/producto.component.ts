@@ -52,14 +52,29 @@ export class ProductoComponent implements OnInit {
     const prioridad = document.getElementById('inputV4') as HTMLInputElement;
     const precio = document.getElementById('inputV5') as HTMLInputElement;
     const descuento = document.getElementById('inputV6') as HTMLInputElement;
-
+    const producto_principal = document.getElementById(`principal`) as HTMLInputElement;
+    const principal_categoria = document.getElementById(`principal_categoria`) as HTMLInputElement;
+    const promo_gratis = document.getElementById(`promo_gratis`) as HTMLInputElement;
+    
+    
     nombre.value = producto.nombre;
     descripcion.value = producto.descripcion;
     cantidad.value = String(producto.cantidad);
     prioridad.value = String(producto.prioridad);
     precio.value = String(producto.precio);
     descuento.value = String(producto.descuento);
-    
+
+    if(producto.principal_categoria){
+      principal_categoria.checked = true;
+    }
+
+    if (producto.principal){
+      producto_principal.checked = true;
+    }
+
+    if(producto.promo_gratis){
+      promo_gratis.checked = true;
+    }
 
     for (let k = 0; k <= 4; k++) {
       const categorias = document.getElementById(`categoriaV${[k]}`) as HTMLInputElement;

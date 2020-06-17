@@ -124,6 +124,10 @@ export class AdminComponent implements OnInit {
   // Crear nuevo Producto
   onSubmit() {
     // tslint:disable-next-line:variable-name
+    const producto_principal = document.getElementById(`principal1`) as HTMLInputElement;
+    const principal_categoria = document.getElementById(`principal_categoria1`) as HTMLInputElement;
+    const promo_gratis = document.getElementById(`promo_gratis1`) as HTMLInputElement;
+
     const product_category = [];
     for (let i = 0; i <= 4; i++) {
       const categoria = document.getElementById(`categoria${[i]}`) as HTMLInputElement;
@@ -140,15 +144,25 @@ export class AdminComponent implements OnInit {
     } else if (this.producto.descuento < 0) {
       this.producto.descuento = 0;
     }
+    console.log(principal_categoria.checked)
+    if(principal_categoria.checked === true){
+      productData.append('principal_categoria', 'true');
+    }
+    console.log(producto_principal.checked)
+    if (producto_principal.checked === true){
+      productData.append('principal', 'true');
+    }
+    console.log(promo_gratis)
+    if(promo_gratis.checked === true){
+      productData.append('promo_gratis', 'true');
+    }
+
     let crear = true;
     if (product_category.length > 1 ){
       alert('Producto tiene mas de una categoria, no puede ser principal de categoria');
       crear = false;
     }
     productData.append('nombre', this.producto.nombre);
-    productData.append('promo_gratis', String( this.producto.promo_gratis));
-    productData.append('principal', String(this.producto.principal));
-    productData.append('principal_categoria', String(this.producto.principal_categoria));
     productData.append('descripcion', this.producto.description);
     productData.append('cantidad', String(this.producto.cantidad));
     productData.append('prioridad', String(this.producto.prioridad));
@@ -266,6 +280,18 @@ export class AdminComponent implements OnInit {
       productData.append('categorias', JSON.stringify(product_category));
     }
 
+    if(principal_categoria.checked === true){
+      productData.append('principal_categoria', 'true');
+    }
+
+    if (principal.checked === true){
+      productData.append('principal', 'true');
+    }
+
+    if(promo_gratis.checked === true){
+      productData.append('promo_gratis', 'true');
+    }
+
     const producto = {};
     productData.forEach((value, key) => {
       producto[key] = value;
@@ -280,9 +306,6 @@ export class AdminComponent implements OnInit {
     productData.append('prioridad', String(prioridad.value));
     productData.append('precio', String(precio.value));
     productData.append('descuento', String(descuento.value));
-    productData.append('principal', String(principal.value));
-    productData.append('promo_gratis', String(promo_gratis.value));
-    productData.append('principal_categoria', String(principal_categoria.value));
 
     if (editar){
       this._productoService.editProduct(this.token, this.idProducto, productData).subscribe(
@@ -335,9 +358,6 @@ export class AdminComponent implements OnInit {
     this.producto.prioridad = 1;
     this.producto.cantidad = 0;
     this.producto.descuento = 0;
-    this.producto.principal = false;
-    this.producto.promo_gratis = false;
-    this.producto.principal_categoria = false;
 
   }
 
