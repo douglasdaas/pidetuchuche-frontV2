@@ -36,8 +36,15 @@
           </div>
 
           <div class="discount" *ngIf="producto.descuento">
-            <h1>{{ producto.descuento }}</h1>
-            <h2>de descuento</h2>
+            <h1>{{ producto.descuento }} %</h1>
+            <h2>de Descuento</h2>
+            <div *ngIf="producto.promo_gratis">
+              <h2>+ Producto Gratis</h2>
+            </div>
+          </div>
+
+          <div class="free" *ngIf="producto.promo_gratis && !producto.descuento">
+              <h1>+ Producto Gratis</h1>
           </div>
 
         </div>
