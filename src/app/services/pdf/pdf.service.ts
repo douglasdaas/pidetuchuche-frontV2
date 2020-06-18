@@ -11,7 +11,7 @@ export class PdfService {
 constructor(
   public _http: HttpClient
 ) {
-  this.url = GLOBAL.urlTest;
+  this.url = GLOBAL.url;
 }
 
     // Obtener URL del PDF

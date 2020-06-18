@@ -48,8 +48,8 @@ export class AdminComponent implements OnInit {
     AOS.init();
     AOS.refresh();
     this.token = this._userService.getToken();
-    this.getProducts();
     this.getSliderPrincipal();
+    this.getProducts();
     this.categorias = [
       new Categoria('combos', null, null),
       new Categoria('chocolates', null, null),
@@ -145,15 +145,17 @@ export class AdminComponent implements OnInit {
       this.producto.descuento = 0;
     }
     console.log(principal_categoria.checked)
-    if(principal_categoria.checked === true){
+    if (principal_categoria.checked === true) {
       productData.append('principal_categoria', 'true');
+    } else {
+      productData.append('principal_categoria', 'false');
     }
     console.log(producto_principal.checked)
-    if (producto_principal.checked === true){
+    if (producto_principal.checked === true) {
       productData.append('principal', 'true');
     }
     console.log(promo_gratis)
-    if(promo_gratis.checked === true){
+    if (promo_gratis.checked === true) {
       productData.append('promo_gratis', 'true');
     }
 
@@ -216,7 +218,7 @@ export class AdminComponent implements OnInit {
     const precio = document.getElementById('inputV5') as HTMLInputElement;
     const descuento = document.getElementById('inputV6') as HTMLInputElement;
     const principal = document.getElementById('principal') as HTMLInputElement;
-    const principal_categoria = document.getElementById('principal_categoria') as HTMLInputElement;
+    let principal_categoria = document.getElementById('principal_categoria') as HTMLInputElement;
     const promo_gratis  =  document.getElementById('promo_gratis') as HTMLInputElement;
 
     nombre.value = producto.nombre;
@@ -226,13 +228,11 @@ export class AdminComponent implements OnInit {
     precio.value = producto.precio;
     descuento.value = producto.descuento;
     principal.value = producto.principal;
-    principal_categoria.value = producto.principal_categoria;
     promo_gratis.value = producto.promo_gratis;
 
     for (let k = 0; k <= 4; k++) {
       const categorias = document.getElementById(`categoriaV${k}`) as HTMLInputElement;
       categorias.checked = false;
-      console.log(`Limpiando Todas las Categorias, ${k} limpiezas`);
     }
 
     if (producto.categorias.length > 0) {
@@ -243,7 +243,7 @@ export class AdminComponent implements OnInit {
           if (producto.categorias[i].nombre === categoria.value ) {
               categoria.checked = true;
               console.log('Agregando categoria :: ', categoria.value);
-            }
+          }
         }
       }
     }
@@ -254,6 +254,8 @@ export class AdminComponent implements OnInit {
     });*/
   }
 
+  // @ts-ignore
+  // @ts-ignore
   editProduct() {
     const nombre = document.getElementById('inputV1') as HTMLInputElement;
     const descripcion = document.getElementById('inputV2') as HTMLInputElement;
@@ -275,11 +277,10 @@ export class AdminComponent implements OnInit {
       }
     }
     let editar = true;
-    if (this.producto.principal_categoria = true){
-      if (product_category.length > 1 && product_category.length < 0){
-        alert('El Producto para ser principal debe tener una y solo una categoria');
+    console.log(`numero de categorias ${product_category.length}`);
+    if ((product_category.length === 0 || product_category.length > 1 ) && principal_categoria.checked === true) {
+        alert('El Producto para ser principal de una categoria debe tener una y solo una categoria');
         editar = false;
-      }
     }
 
     // Se agrega la imagen si existe en el request
@@ -292,7 +293,7 @@ export class AdminComponent implements OnInit {
       productData.append('categorias', JSON.stringify(product_category));
     }
 
-    if(principal_categoria.checked === true){
+    if (principal_categoria.checked === true){
       productData.append('principal_categoria', 'true');
     }
 
@@ -319,11 +320,12 @@ export class AdminComponent implements OnInit {
     productData.append('precio', String(precio.value));
     productData.append('descuento', String(descuento.value));
 
-    if (editar){
+    if (editar) {
       this._productoService.editProduct(this.token, this.idProducto, productData).subscribe(
         response => {
           console.log(response);
           alert('Producto modificado');
+          this.getProducts();
           AOS.refresh();
         },
         error => {
@@ -331,8 +333,6 @@ export class AdminComponent implements OnInit {
           console.log(error as any);
         }
       );
-
-      this.getProducts();
     }
 
   }
@@ -367,7 +367,7 @@ export class AdminComponent implements OnInit {
     this.producto.ruta_imagen = undefined;
     this.producto.precio = 0;
     this.producto.precio_total = 0;
-    this.producto.prioridad = 1;
+    this.producto.prioridad = undefined;
     this.producto.cantidad = 0;
     this.producto.descuento = 0;
 

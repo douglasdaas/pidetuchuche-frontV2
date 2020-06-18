@@ -55,8 +55,8 @@ export class ProductoComponent implements OnInit {
     const producto_principal = document.getElementById(`principal`) as HTMLInputElement;
     const principal_categoria = document.getElementById(`principal_categoria`) as HTMLInputElement;
     const promo_gratis = document.getElementById(`promo_gratis`) as HTMLInputElement;
-    
-    
+
+
     nombre.value = producto.nombre;
     descripcion.value = producto.descripcion;
     cantidad.value = String(producto.cantidad);
@@ -95,57 +95,15 @@ export class ProductoComponent implements OnInit {
               categoria.checked = true;
               console.log('Agregando categoria :: ', categoria.value);
             }
+          if (producto.categorias[i].pivot.principal_categoria === true){
+            principal_categoria.checked = true;
+          }
         }
       }
     }
 
     this.shouldEdit.emit(
       producto.id
-    );
-  }
-
-  editProduct(producto) {
-    const nombre = document.getElementById('inputV1') as HTMLInputElement;
-    const descripcion = document.getElementById('inputV2') as HTMLInputElement;
-    const cantidad = document.getElementById('inputV3') as HTMLInputElement;
-    const prioridad = document.getElementById('inputV4') as HTMLInputElement;
-    const precio = document.getElementById('inputV5') as HTMLInputElement;
-    const descuento = document.getElementById('inputV6') as HTMLInputElement;
-
-    // tslint:disable-next-line:variable-name
-    const product_category = [];
-    // Se agregan las categorias al request
-    for (let i = 0; i <= 4; i++) {
-      const categoria = document.getElementById(`categoriaV${i}`) as HTMLInputElement;
-      if (categoria.checked === true) {
-        product_category.push(categoria.value);
-      }
-    }
-
-    // Se agrega la imagen si existe en el request
-    const productData = new FormData();
-    if ( $('#inputVIMG').prop('files')[0] !== undefined ) {
-      productData.append('imagen', $('#inputVIMG').prop('files')[0]);
-    }
-
-    productData.append('id', String(producto.id));
-    productData.append('nombre', String(nombre));
-    productData.append('descripcion', String(descripcion));
-    productData.append('cantidad', String(cantidad));
-    productData.append('prioridad', String(prioridad));
-    productData.append('precio', String(precio));
-    productData.append('descuento', String(descuento));
-
-    this._productoService.editProduct(this.token, producto.id , productData).subscribe(
-      response => {
-        console.log(response);
-        alert('Producto modificado');
-        AOS.refresh();
-      },
-      error => {
-        alert('Error');
-        console.log(error as any);
-      }
     );
   }
 

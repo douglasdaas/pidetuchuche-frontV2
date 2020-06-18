@@ -12,7 +12,7 @@ export class ProductoService {
     public _http: HttpClient
   ) {
 
-  this.url = GLOBAL.urlTest;
+  this.url = GLOBAL.url;
 
   }
 

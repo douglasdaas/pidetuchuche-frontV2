@@ -14,7 +14,7 @@ export class UserService {
   constructor(
     public _http: HttpClient
   ) {
-    this.url = GLOBAL.urlTest;
+    this.url = GLOBAL.url;
   }
 
   signup( user): Observable<any> {
