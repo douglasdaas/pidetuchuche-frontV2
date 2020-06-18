@@ -11,7 +11,6 @@
     "e2e": "ng e2e",
     "lite": "lite-server",
     "optimizecss": "gulp --gulpfile optimize-css.gulpfile.js",
-    "heroku-prebuild": "npm run optimizecss"
   },
   "private": true,
   "dependencies": {
