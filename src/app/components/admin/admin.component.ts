@@ -341,6 +341,13 @@ export class AdminComponent implements OnInit {
     this.idProducto = id;
   }
 
+  shouldRefresh(value) {
+    if(value){
+      this.getProducts();
+      AOS.refresh();
+    }
+  }
+
   sellProduct(producto) {
     const sellQuantity = document.getElementById(producto.id) as HTMLInputElement;
     const productData = new FormData();
@@ -416,9 +423,6 @@ export class AdminComponent implements OnInit {
         console.log(response);
         if (response.status = true ) {
           this.sliderProducts = response.datos;
-          if (this.sliderProductsByCategory.length === 0) {
-            this.shouldFiltSlider = false;
-          }
           console.log(this.sliderProducts);
         }
       },

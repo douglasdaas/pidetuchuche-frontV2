@@ -20,6 +20,7 @@ export class ProductoComponent implements OnInit {
   @Input() productos: Array<Producto>;
   @Input() categorias: Array<Categoria>;
   @Output() public shouldEdit = new EventEmitter<any>();
+  @Output() public shouldRefresh = new EventEmitter<any>();
   public token;
 
   constructor(
@@ -115,6 +116,9 @@ export class ProductoComponent implements OnInit {
         response => {
           console.log(response);
           alert('Producto eliminado');
+          this.shouldRefresh.emit(
+            true
+          );
           AOS.refresh();
         },
         error => {

@@ -749,11 +749,13 @@
         <app-producto
           [productos]="productos"
           (shouldEdit)="shouldEdit($event)"
+          (shouldRefresh)="shouldRefresh($event)"
         ></app-producto>
       </div>
       <div *ngIf="filterProducts != undefined">
         <app-producto
           [productos]="filterProducts"
+          (shouldRefresh)="shouldRefresh($event)"
           (shouldEdit)="shouldEdit($event)"
         ></app-producto>
       </div>
