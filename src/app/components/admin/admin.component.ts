@@ -97,8 +97,8 @@ export class AdminComponent implements OnInit {
         }
       });
       this.filterProducts = filterByCategory;
-      this.getSliderByCategory(nombreCategoria);
     }
+    this.getSliderByCategory(nombreCategoria);
   }
 
   logout() {
