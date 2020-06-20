@@ -65,8 +65,8 @@ export class HomeComponent implements OnInit {
         }
       });
       this.filterProducts = filterByCategory;
-      this.getSliderByCategory(nombreCategoria);
     }
+    this.getSliderByCategory(nombreCategoria);
   }
 
   filterProduct(event){
