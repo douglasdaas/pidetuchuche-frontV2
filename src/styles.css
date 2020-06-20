@@ -415,7 +415,7 @@ a {
 }
 
 .foot{
-  background-color: #fea2a6;
+  background-color: #ff799a;
   height: 65px;
 }
 
@@ -693,7 +693,7 @@ a {
 }
 .img-principal {
     position: absolute;
-    max-width: 776px;
+    max-width: 605px;
     top: -13px;
     left: -58px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -883,7 +883,7 @@ nav i {
     overflow: hidden !important;
 }
 .foot{
-  background-color: #fea2a6;
+  background-color: #ff799a;
   height: 80px;
 }
 .foot i{
