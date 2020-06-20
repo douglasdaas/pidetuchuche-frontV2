@@ -10,7 +10,9 @@
           <div class="product-info col-md-8">
             <div class="product-text">
               <h1>{{ producto.nombre }}</h1>
-              <h2>{{ producto.categorias.nombre }}</h2>
+              <div *ngFor="let categoria of producto.categorias" >
+                <h2>{{ categoria.nombre }}</h2>
+              </div>
               <h3>Precio: {{ producto.precio_total }} $</h3>
               <h4>Stock: {{ producto.cantidad }}</h4>
               <p>{{ producto.descripcion }}</p>

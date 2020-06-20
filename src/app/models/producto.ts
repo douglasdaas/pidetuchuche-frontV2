@@ -5,7 +5,7 @@ export class Producto{
         public id:number,
         public nombre:string,
         public ruta_imagen:string,
-        public description:string,
+        public descripcion:string,
         public cantidad:number,
         public prioridad:number,
         public precio:number,
