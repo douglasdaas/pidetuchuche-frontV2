@@ -167,7 +167,7 @@ export class AdminComponent implements OnInit {
       }
     }
     productData.append('nombre', this.producto.nombre);
-    productData.append('descripcion', this.producto.description);
+    productData.append('descripcion', this.producto.descripcion);
     productData.append('cantidad', String(this.producto.cantidad));
     productData.append('prioridad', String(this.producto.prioridad));
     productData.append('precio', String(this.producto.precio));
@@ -222,7 +222,7 @@ export class AdminComponent implements OnInit {
     const promo_gratis  =  document.getElementById('promo_gratis') as HTMLInputElement;
 
     nombre.value = producto.nombre;
-    descripcion.value = producto.description;
+    descripcion.value = producto.descripcion;
     cantidad.value = producto.cantidad;
     prioridad.value = producto.prioridad;
     precio.value = producto.precio;
@@ -370,7 +370,7 @@ export class AdminComponent implements OnInit {
   clearProduct() {
     // this.producto.id = 1;
     this.producto.nombre = '';
-    this.producto.description = '';
+    this.producto.descripcion = '';
     this.producto.ruta_imagen = undefined;
     this.producto.precio = 0;
     this.producto.precio_total = 0;
