@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+const port = process.env.PORT || 8080
 
 app.use(express.static(__dirname+'/../dist/pidetuchuche-Angular'));
 
@@ -13,4 +14,6 @@ app.get('*', (request, response) => {
   response.sendFile(path.join(__dirname, '../dist/pidetuchuche-Angular', 'index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(port);
+
+console.log(`App in port: ${port}`)
